@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SDMV</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:300,400|Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lora:400italic' rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="initial-scale=1">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link rel="shortcut icon" href="http://www.trueinteraction.com/favicon.ico" />
+  
+ <!-- 
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://handsontable.com/dist/handsontable.full.js"></script>
+  <link rel="stylesheet" media="screen" href="http://handsontable.com/dist/handsontable.full.css">
+  <link rel="stylesheet" media="screen" href="http://handsontable.com/demo/css/samples.css">
+-->
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+//-->
+</script>
+</html>

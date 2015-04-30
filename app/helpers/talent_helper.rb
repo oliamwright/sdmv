@@ -1,0 +1,2 @@
+module TalentHelper
+end
