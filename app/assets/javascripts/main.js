@@ -52,7 +52,7 @@ $(document).ready(function() {
         $('#social_result').html(social_result_append);
         $('#social_news_comp').text('Social / News Keyword Comp = ' + e.similarity + '%');
 
-        output_social_person(undefined);
+        calculate_social_person();
       },
       error: function(e) {
       }
@@ -73,77 +73,100 @@ $(document).ready(function() {
     }
   });
 
-  function output_social_person (obj) {
-    if (obj === undefined) {  // Social keywords was changed
-      similarity_percent1 = calculate_social_person($('#person_keywords1'));
-      $('#person_int_lvl1').text(similarity_percent1);
+  function calculate_social_person () {
+    for (var j = 1 ; j <= 3; j++ ) {
+      keywords = $('#person_keywords' + j).val().split(',');
 
-      similarity_percent2 = calculate_social_person($('#person_keywords2'));
-      $('#person_int_lvl2').text(similarity_percent2);
+      for (var i = 0; i < keywords.length; i++) {
+        keywords[i] = keywords[i].trim();
+      }
 
-      similarity_percent3 = calculate_social_person($('#person_keywords3'));
-      $('#person_int_lvl3').text(similarity_percent3);
-    } else {  // Person keywords was changed
-      return calculate_social_person(obj);
+      same_count = 0;
+      for (var i = 0; i < keywords.length; i++) {
+        if ($.inArray(keywords[i], social_keywords) > -1) {
+          same_count += 1;
+        }
+      }
+
+      similarity_percent = 0;
+      if (same_count == 0 || social_keywords.length == 0) {
+        similarity_percent = 0;
+      }
+      else {
+        similarity_percent = (same_count / social_keywords.length) * 100;
+      }
+
+      $('#person_int_lvl' + j).text(similarity_percent);
+      $('#venue' + j + '_int' + i).html((similarity_percent / 100).toFixed(1));
     }
   }
 
-  function calculate_social_person (obj) {
-    keywords = obj.val().split(',');
+  // Calculate and show value of Venue{#} by each Person{#} data
+  // Sum up the VAL
+  function calculate_venue_val() {
+    for (var i = 1; i <= 3; i++) {
+      val_sum = 0;
+      for (var j = 1; j <=3; j++) {
+        dist = isNaN($('#venue' + i + '_dist' + j).html()) ? 0 : $('#venue' + i + '_dist' + j).html();
+        int_lvl = isNaN($('#venue' + i + '_int' + j).html()) ? 0 : $('#venue' + i + '_int' + j).html();
+        inf = isNaN($('#venue' + i + '_influence' + j).html()) ? 0 : $('#venue' + i + '_influence' + j).html();
 
-    for (var i = 0; i < keywords.length; i++) {
-      keywords[i] = keywords[i].trim();
-    }
+        val = 0
+        if (dist == 0) {
+          val = 0;
+        } else {
+          val = (int_lvl * inf) / dist;
+        }
 
-    same_count = 0;
-    for (var i = 0; i < keywords.length; i++) {
-      if ($.inArray(keywords[i], social_keywords) > -1) {
-        same_count += 1;
+        val_sum += val;
+        $('#venue' + i + '_val' + j).html(val.toFixed(1));
       }
-    }
 
-    similarity_percent = 0;
-    if (same_count == 0 || social_keywords.length == 0) {
-      similarity_percent = 0;
+      $('#venue_val_sum' + i).html(val_sum.toFixed(1));
     }
-    else {
-      similarity_percent = (same_count / social_keywords.length) * 100;
-    }
+  }
 
-    return similarity_percent;
+  // Calculate and show dist of Venue{#} by each Person{#} data
+  // Sum up the DIST
+  function calculate_venue_dist() {
+    for (var i = 1; i <= 3; i++) {
+      dist_sum = 0;
+      for (var j = 1; j <= 3; j++) {
+        v_x = isNaN($('#venue_x' + i).val()) ? 0 : $('#venue_x' + i).val();
+        v_y = isNaN($('#venue_y' + i).val()) ? 0 : $('#venue_y' + i).val();
+        p_x = isNaN($('#person_location_x' + j).val()) ? 0 : $('#person_location_x' + j).val();
+        p_y = isNaN($('#person_location_y' + j).val()) ? 0 : $('#person_location_y' + j).val();
+
+        v = Math.sqrt(Math.pow((v_x - p_x), 2) + Math.pow((v_y - p_y), 2));
+
+        dist_sum += v;
+        $('#venue' + i + '_dist' + j).html(v.toFixed(1));
+      }
+      $('#venue_dist_sum' + i).html(dist_sum.toFixed(1));
+    }
   }
 
   // Person1 keywords
-  $('#person_keywords1').on('blur', function() {
-    similarity_percent = output_social_person($(this));
-    $('#person_int_lvl1').text(similarity_percent);
-  });
-
-  // Person2 keywords
-  $('#person_keywords2').on('blur', function() {
-    similarity_percent = output_social_person($(this));
-    $('#person_int_lvl2').text(similarity_percent);
-  });
-
-  // Person3 keywords
-  $('#person_keywords3').on('blur', function() {
-    similarity_percent = output_social_person($(this));
-    $('#person_int_lvl3').text(similarity_percent);
+  $('#person_keywords1, #person_keywords2, #person_keywords3').on('blur', function() {
+    calculate_social_person();
   });
 
   $('#person_location_x1, #person_location_y1, #venue_x1, #venue_y1,' +
     '#person_location_x2, #person_location_y2, #venue_x2, #venue_y2,' + 
     '#person_location_x3, #person_location_y3, #venue_x3, #venue_y3')
   .on('blur', function() {
-    
+
+    calculate_venue_dist();
+    calculate_venue_val();
   })
 
   $('#influence1, #influence2, #influence3').on('blur', function() {
-    debugger;
     for (var i = 1; i <= 3; i++) {
       for (var j = 1; j <= 3; j++) {
-        $('#venue'+i+'_influence'+j).html($('#influence'+j).val());
+        $('#venue' + i + '_influence' + j).html($('#influence' + j).val());
       }
     }
+
+    calculate_venue_val();
   })
 });

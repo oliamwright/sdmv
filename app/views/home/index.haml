@@ -71,7 +71,7 @@
 			%h4 Keywords
 			%input#person_keywords1.requirement{:value => "nepal, earthquake"}
 			%p.sum
-				| INT LVL = 
+				INT LVL = 
 				%span#person_int_lvl1 100
 				%span %
 			.note Compare the similarity between Social and Person Keywords
@@ -88,8 +88,8 @@
 			%hr
 			%h4 Keywords
 			%input#person_keywords2.requirement{:value => "japan, earthquake"}
-			%p.Sum
-				| INT LVL = 
+			%p.sum
+				INT LVL = 
 				%span#person_int_lvl2 50
 				%span %
 		.box
@@ -106,7 +106,7 @@
 			%h4 Keywords
 			%input#person_keywords3.requirement{:value => "japan"}
 			%p.sum
-				| INT LVL = 
+				INT LVL = 
 				%span#person_int_lvl3 0
 				%span %
 	.grid_3
@@ -127,28 +127,28 @@
 					%th VAL
 				%tr
 					%td Person #1
-					%td 2.8
-					%td .5
+					%td#venue1_dist1 2.8
+					%td#venue1_int1 .5
 					%td#venue1_influence1 100
-					%td 10.0
+					%td#venue1_val1 10.0
 				%tr
 					%td Person #2
-					%td 1.0
-					%td .2
+					%td#venue1_dist2 1.0
+					%td#venue1_int2 .2
 					%td#venue1_influence2 200
-					%td 4.4
+					%td#venue1_val2 4.4
 				%tr
 					%td Person #3
-					%td 8.5
-					%td .1
+					%td#venue1_dist3 8.5
+					%td#venue1_int3 .1
 					%td#venue1_influence3 500
-					%td 38.5
+					%td#venue1_val3 38.5
 				%tr.sum
 					%td 
-					%td 12.3
+					%td#venue_dist_sum1 12.3
 					%td 
 					%td 
-					%td 52.9
+					%td#venue_val_sum1 52.9
 			.note 
 				%b DIST 
 				= "Calculate Distance Between Person & Venue =SQRT((VenueX-PersonX)^2+(VenueY-PersonY)^2)"
@@ -176,28 +176,28 @@
 					%th VAL
 				%tr
 					%td Person #1
-					%td 1
-					%td .5
+					%td#venue2_dist1 1
+					%td#venue2_int1 .5
 					%td#venue2_influence1 100
-					%td 50.0
+					%td#venue2_val1 50.0
 				%tr
 					%td Person #2
-					%td 5
-					%td .2
+					%td#venue2_dist2 5
+					%td#venue2_int2 .2
 					%td#venue2_influence2 200
-					%td 8
+					%td#venue2_val2 8
 				%tr
 					%td Person #3
-					%td 9
-					%td .1
+					%td#venue2_dist3 9
+					%td#venue2_int3 .1
 					%td#venue2_influence3 500
-					%td 55.6
+					%td#venue2_val3 55.6
 				%tr.sum
 					%td 
-					%td 10
+					%td#venue_dist_sum2 10
 					%td 
 					%td 
-					%td 113.6
+					%td#venue_val_sum2 113.6
 		.box
 			%h3 Venue #3
 			%h4 Location (X,Y)
@@ -212,25 +212,25 @@
 					%th VAL
 				%tr
 					%td Person #1
-					%td 3
-					%td .5
+					%td#venue3_dist1 3
+					%td#venue3_int1 .5
 					%td#venue3_influence1 100
-					%td 16.7
+					%td#venue3_val1 16.7
 				%tr
 					%td Person #2
-					%td 7
-					%td .2
+					%td#venue3_dist2 7
+					%td#venue3_int2 .2
 					%td#venue3_influence2 200
-					%td 5.7
+					%td#venue3_val2 5.7
 				%tr
 					%td Person #3
-					%td 11
-					%td .1
+					%td#venue3_dist3 11
+					%td#venue3_int3 .1
 					%td#venue3_influence3 500
-					%td 45.5
+					%td#venue3_val3 45.5
 				%tr.sum
 					%td 
-					%td 10
+					%td#venue_dist_sum3 10
 					%td 
 					%td 
-					%td 67.8
+					%td#venue_val_sum3 67.8
