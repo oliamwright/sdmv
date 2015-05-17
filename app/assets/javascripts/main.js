@@ -12,8 +12,8 @@ $(document).ready(function() {
         exclusion:  $('#exclusion').val()
       },
       success: function(e) {
-        append_news_result(e);
         news_keywords = JSON.parse(e.news_keywords);
+        append_news_result(e);
       },
       error: function(e) {
       }
@@ -31,6 +31,9 @@ $(document).ready(function() {
     }
     $('#news_result').html(news_result_append);
     $('#social_news_comp').text('Social / News Keyword Comp = ' + resp.similarity + '%');
+
+    $('#title_keyword1').html(news_keywords[0] ? news_keywords[0] : "" );
+    $('#title_keyword2').html(news_keywords[1] ? news_keywords[1] : "" );
   }
 
   // when lost focus on social area
@@ -60,10 +63,7 @@ $(document).ready(function() {
   });
 
   // when lost focus on news area
-  $('#news').on('blur', update_news);
-
-  // when lost focus on exclusion area
-  $('#exclusion').on('blur', update_news);
+  $('#news, #exclusion').on('blur', update_news);
 
   // If numeric field value is not invalid, give focus on that
   $('.numeric').on('blur', function() {
@@ -74,6 +74,7 @@ $(document).ready(function() {
   });
 
   function calculate_social_person () {
+    sum_int = 0;
     for (var j = 1 ; j <= 3; j++ ) {
       keywords = $('#person_keywords' + j).val().split(',');
 
@@ -96,14 +97,19 @@ $(document).ready(function() {
         similarity_percent = (same_count / social_keywords.length) * 100;
       }
 
+      sum_int += similarity_percent;
       $('#person_int_lvl' + j).text(similarity_percent);
       $('#venue' + j + '_int' + i).html((similarity_percent / 100).toFixed(1));
     }
+
+    $('#avg_int').html((sum_int / 3).toFixed(1));
   }
 
   // Calculate and show value of Venue{#} by each Person{#} data
   // Sum up the VAL
   function calculate_venue_val() {
+    val_max_idx = 0;
+    val_max = -99999;
     for (var i = 1; i <= 3; i++) {
       val_sum = 0;
       for (var j = 1; j <=3; j++) {
@@ -118,11 +124,19 @@ $(document).ready(function() {
           val = (int_lvl * inf) / dist;
         }
 
+        val = parseFloat(val.toFixed(1));
         val_sum += val;
-        $('#venue' + i + '_val' + j).html(val.toFixed(1));
+        $('#venue' + i + '_val' + j).html(val);
+
+        // Get maximum Venue and its index
+        if (val > val_max) {
+          val_max = val;
+          val_max_idx = i;
+        }
       }
 
       $('#venue_val_sum' + i).html(val_sum.toFixed(1));
+      $('#max_venue').html(val_max_idx);
     }
   }
 
@@ -161,12 +175,43 @@ $(document).ready(function() {
   })
 
   $('#influence1, #influence2, #influence3').on('blur', function() {
+    
     for (var i = 1; i <= 3; i++) {
+      inf_sum = 0;
+
       for (var j = 1; j <= 3; j++) {
         $('#venue' + i + '_influence' + j).html($('#influence' + j).val());
+        inf_sum += parseFloat($('#influence' + j).val());
       }
     }
-
+    debugger;
+    $('#avg_influence').html((inf_sum / 3).toFixed(1));
     calculate_venue_val();
+  })
+
+  $('#person1_availability_min, #person1_availability_max,' + 
+    '#person2_availability_min, #person2_availability_max' + 
+    '#person3_availability_min, #person3_availability_max').on('blur', function() {
+
+   if (isNaN($(this).val())) {
+      alert('Please input numeric value.');
+      $(this).focus();  
+    } else {
+      p1_min = isNaN($('#person1_availability_min').val()) ? 0 : parseFloat($('#person1_availability_min').val());
+      p1_max = isNaN($('#person1_availability_max').val()) ? 0 : parseFloat($('#person1_availability_max').val());
+
+      avg1 = (p1_max + p1_min) / 2;
+
+      p2_min = isNaN($('#person2_availability_min').val()) ? 0 : parseFloat($('#person2_availability_min').val());
+      p2_max = isNaN($('#person2_availability_max').val()) ? 0 : parseFloat($('#person2_availability_max').val());
+      avg2 = (p2_max + p2_min) / 2;      
+
+      p3_min = isNaN($('#person3_availability_min').val()) ? 0 : parseFloat($('#person3_availability_min').val());
+      p3_max = isNaN($('#person3_availability_max').val()) ? 0 : parseFloat($('#person3_availability_max').val());
+      avg3 = (p3_max + p3_min) / 2;
+
+      avg = (avg1 + avg2 + avg3) / 3;
+      $('#avg_availability').html(avg.toFixed(1));
+    }
   })
 });

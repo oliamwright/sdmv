@@ -4,8 +4,8 @@ class DataController < ApplicationController
   # When news value is changed, extract top 5 keywords and calculate simularity
   # When exclusion value is changed, extract top 5 keywords and calculate simularity
   def news
-    exclusion = params[:exclusion].nil? ? "" : params[:exclusion]
-    news = params[:news].nil? ? "" : params[:news]
+    exclusion = params[:exclusion].nil? ? "" : params[:exclusion].downcase
+    news = params[:news].nil? ? "" : params[:news].downcase
 
     exclusion_list = exclusion.split(/,/)
     unless exclusion_list.nil?
@@ -50,7 +50,7 @@ class DataController < ApplicationController
   # when change social value, extract top 5 keywords and calculate simularity
   def social
 
-    social = params[:social]
+    social = params[:social].nil? ? "" : params[:social].downcase
 
     social_segment = Hash.new(0)
     social.split(/,/).each(&:strip!).each do |word|

@@ -4,20 +4,22 @@
 		%hr
 	.grid_12
 		%h2 
-			.key1.inline Nepal 
-			.key2.inline Earthquake 
+			.key1#title_keyword1.inline 
+			.key2#title_keyword2.inline
 			.start.inline 
 				%b @:
-				12
+				%span#avg_availability
 			.venue.inline
 				%b @:
-				Venue #2
+				Venue #
+				%span#max_venue
 			.inflvl.inline 
 				%b INF:
-				300
+				%span#avg_influence
 			.intlvl.inline
 				%b INT:
-				80%
+				%span#avg_int
+				%span %
 		.note Take Top Keyword 1 + Top Keyword 2 from News & Social, and find the average value between Availability, and choose Venue with highest weight, and show average of influence and interest levels.
 		%hr
 	.grid_3
@@ -63,8 +65,8 @@
 			%input#influence1.requirement.numeric{:value => "500"}
 			.note Allow for any number: for example 100.5 or -100.5 to be entered into the Influence Field
 			%h4 Availability Range
-			%input.time.numeric{:value => "9"}
-			%input.time.numeric{:value => "18"}
+			%input#person1_availability_min.time{:value => "9"}
+			%input#person1_availability_max.time{:value => "18"}
 			%br
 			.note Allow for any number: for example 100.5 or -100.5 to be entered into the Availability Field
 			%hr
@@ -83,8 +85,8 @@
 			%h4 Influence (higher is better)
 			%input#influence2.requirement{:value => "500"}
 			%h4 Availability Range
-			%input.time.numeric{:value => "12"}
-			%input.time.numeric{:value => "13"}
+			%input#person2_availability_min.time{:value => "12"}
+			%input#person2_availability_max.time{:value => "13"}
 			%hr
 			%h4 Keywords
 			%input#person_keywords2.requirement{:value => "japan, earthquake"}
@@ -100,8 +102,8 @@
 			%h4 Influence (higher is better)
 			%input#influence3.requirement.numeric{:value => "500"}
 			%h4 Availability Range
-			%input.time.numeric{:value => "9"}
-			%input.time.numeric{:value => "18"}
+			%input#person3_availability_min.time{:value => "9"}
+			%input#person3_availability_max.time{:value => "18"}
 			%hr
 			%h4 Keywords
 			%input#person_keywords3.requirement{:value => "japan"}
