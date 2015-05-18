@@ -45,6 +45,9 @@ table {
 	border-collapse: collapse;
 	margin: 0px;
 }
+.key {
+	text-transform: capitalize;
+}
 //--SPECIAL ELEMENTS--//
 .logo {
 	color: #5CACC4;
@@ -273,7 +276,7 @@ tr.ignore {
 }
 .note {
 	background: yellow;
-	display: inline;
+	display: none;
 }
 //--IMG--//
 .thumbnail-small {
