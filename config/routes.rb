@@ -15,4 +15,7 @@ Rails.application.routes.draw do
   get'project', :to => "home#project"
   get'projects', :to => "home#projects"
   get'profile', :to => "home#profile"
+
+  post '/news', :to => 'data#news', :as => 'news'
+  post '/social', :to => 'data#social', :as => 'social'
 end
