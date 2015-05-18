@@ -26,9 +26,22 @@
 			.inflvl.inline 
 				%b influence:
 				%span#avg_influence
-
-	.grid_8
-		#container{:style => "min-width: 310px; height: 400px; max-width: 800px; margin: 0 auto"}
+		
+	.grid_4
+		%h2 
+			.inflvl.inline 
+				%b possibly attending: 
+				1
+				%span#poss_attending
+				.note if interest is greater than 0% then flag as attending 
+			%br
+			.inflvl.inline 
+				%b probably attending:
+				2
+				%span#prob_attending
+				.note if interest is greater than 50% then flag as attending 
+	.grid_4
+		#container{:style => "height: 320px; margin: 0 auto;"}
 	.grid_12
 		.note Take Top Keyword 1 + Top Keyword 2 from News & Social, and find the average value between Availability, and choose Venue with highest weight, and show average of influence and interest levels.
 		%hr
@@ -210,6 +223,8 @@
 					%td 
 					%td 
 					%td#venue_val_sum2 113.6
+			.error It appears interest level doesn't always update
+					
 		.box
 			%h3 Venue #3
 			%h4 Location (X,Y)
@@ -246,3 +261,5 @@
 					%td 
 					%td 
 					%td#venue_val_sum3 67.8
+	.grid_12
+		= render :partial => 'shared/tasks'
