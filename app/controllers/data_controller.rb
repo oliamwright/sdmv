@@ -7,16 +7,20 @@ class DataController < ApplicationController
     exclusion = params[:exclusion].nil? ? "" : params[:exclusion].downcase
     news = params[:news].nil? ? "" : params[:news].downcase
 
-    exclusion_list = exclusion.split(/,/)
-    unless exclusion_list.nil?
-      exclusion_list.each(&:strip)
-    end
+    # Replace tailing dot with space
+    news = news.gsub('.', ' ')
+    news = news.squish
 
+    # Remove whitespace from the exlucsion keywords
+    exclusion = exclusion.delete(' ')
+    exclusion_list = exclusion.split(/,/)
+
+    # Tokenize news with whitespace
     news_segment = Hash.new(0)
     news.split(/ /).each do |word|
       # check exclusion array contains a word
-      unless exclusion_list.include? word
-        news_segment[word] += 1
+      unless exclusion_list.include? word.strip
+        news_segment[word.strip] += 1
       end
     end
 
@@ -51,6 +55,7 @@ class DataController < ApplicationController
   def social
 
     social = params[:social].nil? ? "" : params[:social].downcase
+    social = social.squish
 
     social_segment = Hash.new(0)
     social.split(/,/).each(&:strip!).each do |word|
