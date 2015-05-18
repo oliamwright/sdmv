@@ -2,8 +2,8 @@
 	.grid_12
 		%h1 SDMV
 		%hr
-	.grid_4
-		%h2 
+	.grid_12
+		%h2
 			The
 			.key.key1#title_keyword1.inline 
 			.key.key2#title_keyword2.inline
@@ -15,7 +15,33 @@
 				at
 				Venue #
 				%span#max_venue
-			%br
+		%hr
+	.grid_4
+		INT LVL needs to be greater than:
+		%br
+		%input{:value => ".1"} 
+		%br
+		to = Possibly Attending
+		%hr
+		INT LVL needs to be greater than:
+		%br
+		%input{:value => ".5"} 
+		%br
+		to = Probably Attending
+		%hr
+		If Probably of Attending # is Greater than 
+		%input{:value => "2"}
+		%br
+		Then Push = 
+		%b TRUE
+		%hr
+		If Push = TRUE, then display
+		%br
+		.btn Push Notice
+		%br
+		.notice Push Notification Sent
+	.grid_4
+		%h2 
 			.intlvl.inline
 				%b interest:
 				%span#avg_int
@@ -24,32 +50,31 @@
 			.inflvl.inline 
 				%b influence:
 				%span#avg_influence
-		
-	.grid_4
+			%br
+			.inflvl.inline 
+				%b Starts In:
+				01:15:32
+				%span#starts_in
+		%hr
 		%h2 
 			.possatt.inline 
 				%b possibly attending: 
 				1
 				%span#poss_attending
-				.note if interest is greater than 0% then flag as attending 
+				.note if interest is greater than 0% then flag as possibly attending 
 			%br
 			.probatt.inline 
 				%b probably attending:
 				2
 				%span#prob_attending
-				.note if interest is greater than 50% then flag as attending 
+				.note if interest is greater than 50% then flag as probably attending 
 			%br
 			.joined.inline
 				%b joined:
 				0
 	.grid_4
 		#container{:style => "height: 320px; margin: 0 auto;"}
-	.grid_12
-		%hr
-		If Probably Attending is Greater than 
-		%input
-		Then Push = 
-		%b True
+
 	.grid_12
 		.note Take Top Keyword 1 + Top Keyword 2 from News & Social, and find the average value between Availability, and choose Venue with highest weight, and show average of influence and interest levels.
 		%hr
@@ -59,7 +84,7 @@
 			%h3 News Source #1
 			%textarea#news.news{} Nepal earthquake Death toll passes 4,800 as rescuers in nepal face challenges. More than 4,800 people dead. More than 9,200 injured. Eight million affected across Nepal. One million children urgently in need of help. Those are the startling numbers that indicate the scale of the devastation from the huge earthquake that struck the Himalayan nation on Saturday.
 			%h3 Exclusions
-			%textarea#exclusion.social{}the,and,those,are,that,of,more,than,.,in,
+			%textarea#exclusion.social{}the,and,those,are,that,of,more,than,.,in,more,are,on
 			%h4 Top 5 Keywords by Density
 			%ul#news_result
 				/ %li Nepal (6)
@@ -108,6 +133,8 @@
 				%span#person_int_lvl1 0
 				%span %
 			.note Compare the similarity between Social and Person Keywords
+			.notice Push Notification Received
+			.add + Join
 		.box
 			%h3 Person #2
 			%h4 Location (X,Y)
@@ -125,6 +152,8 @@
 				INT LVL = 
 				%span#person_int_lvl2 0
 				%span %
+			.notice Push Notification Received
+			.add + Join
 		.box
 			%h3 Person #3
 			%h4 Location (X,Y)
@@ -142,6 +171,8 @@
 				INT LVL = 
 				%span#person_int_lvl3 0
 				%span %
+			.notice Push Notification Received
+			.add + Join
 	.grid_3
 		%h2 Venue
 		.box

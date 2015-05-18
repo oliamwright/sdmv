@@ -8,7 +8,7 @@
 		%tr
 			%th ID
 			%th Status
-			%th Tasks
+			%th.desc Tasks
 			%th Tasked
 			%th Entered
 		%tr.open
@@ -23,6 +23,12 @@
 			%td Tie together headerFormat: '<b>{series.name}</b>' to be Person Identifier i.e. Person #1
 			%td @dennischan
 			%td May 18, 2015
+		%tr.open
+			%td 1.2
+			%td.indicator Open
+			%td Add Google Map with Plotted People and Venues Updating in Realtime.
+			%td @dennischan
+			%td May 18, 2015
 		%tr.requirement
 			%td{:colspan => "1"} 2
 			%td{:colspan => "1"} Open
@@ -31,7 +37,25 @@
 		%tr.open
 			%td 2.1
 			%td.indicator Open
-			%td Add Number of Attending based on their Interest Score
+			%td Add Number of Possibly Attending if their score is greater than 0%
+			%td @dennischan
+			%td May 18, 2015
+		%tr.open
+			%td 2.2
+			%td.indicator Open
+			%td Add Number of Probably Attending if their score is greater than 50%
+			%td @dennischan
+			%td May 18, 2015
+		%tr.open
+			%td 2.3
+			%td.indicator Open
+			%td Change Start Date to be a time (i.e. 5:30pm)
+			%td @dennischan
+			%td May 18, 2015
+		%tr.open
+			%td 2.4
+			%td.indicator Open
+			%td Add "Event Starts in 00:15:31" and make it countdown in real time. Make it based on local computer time.
 			%td @dennischan
 			%td May 18, 2015
 		%tr.requirement
@@ -43,14 +67,124 @@
 			%td 3.1
 			%td.indicator Open
 			%td 
-				Could you make the Calculation Update a bit stronger? (for example, If I update a Person Keywords 
-				%br
-				it updates INT LVL & Venue INT, but if I update Social Keywords, it doesn’t update Person INT LVL & Venue INT)
+				Could you make the Calculation Update a bit stronger? (for example, If I update a Person Keywords it updates INT LVL & Venue INT, but if I update Social Keywords, it doesn’t update Person INT LVL & Venue INT)
 			%td @dennischan
 			%td May 18, 2015
 		%tr.open
 			%td 3.2
 			%td.indicator Open
-			%td Check INT calculations on Venues for each Person 
+			%td 
+				.error Check INT calculations on Venues for each Person - it appears it doesnt update always correctly.
+			%td @dennischan
+			%td May 18, 2015
+		%tr.requirement
+			%td{:colspan => "1"} 4
+			%td{:colspan => "1"} Open
+			%td{:colspan => "3"}
+				%b.userstory Dyanmic Objects
+		%tr.open
+			%td 4.1
+			%td.indicator Open
+			%td
+				Swap out Venue with Dynamic CRUD Object. Create New venue, Read Venue DataPoints, Update Venue and Delete Venue.
+			%td @dennischan
+			%td May 18, 2015
+		%tr.open
+			%td 4.2
+			%td.indicator Open
+			%td 
+				Swap out Person with Dynamic Object with CRUD.
+			%td @dennischan
+			%td May 18, 2015
+		%tr.open
+			%td 4.3
+			%td.indicator Open
+			%td 
+				Swap out Social with Dynamic Social Media Signal Object with CRUD.
+			%td @dennischan
+			%td May 18, 2015
+		%tr.open
+			%td 4.4
+			%td.indicator Open
+			%td 
+				Swap out News with Dynamic News Signal Object with CRUD.
+			%td @dennischan
+			%td May 18, 2015
+		%tr.requirement
+			%td{:colspan => "1"} 5
+			%td{:colspan => "1"} Open
+			%td{:colspan => "3"}
+				%b.userstory Venue Object
+		%tr.open
+			%td 5.1
+			%td.indicator Open
+			%td
+				Swap out X,Y with Lat, Long
+			%td @dennischan
+			%td May 18, 2015
+		%tr.open
+			%td 5.2
+			%td.indicator Open
+			%td
+				Swap out Lat, Long with Single Address Entry Field (Do Google Lookup to determine position)
+			%td @dennischan
+			%td May 18, 2015
+		%tr.open
+			%td 5.3
+			%td.indicator Open
+			%td
+				Increase Venue Table to include additional Meta (Name, Category, Open Times i.e. 10:00am - 7:00pm, Number of Attendees, Point of Contact, etc.)
+			%td @dennischan
+			%td May 18, 2015
+		%tr.requirement
+			%td{:colspan => "1"} 6
+			%td{:colspan => "1"} Open
+			%td{:colspan => "3"}
+				%b.userstory Person Object
+		%tr.open
+			%td 6.1
+			%td.indicator Open
+			%td
+				Swap out X,Y with Current Known Location (Based on Browser or Mobile GPS Location)
+			%td @dennischan
+			%td May 18, 2015
+		%tr.open
+			%td 6.2
+			%td.indicator Open
+			%td
+				Swap out Availability Range with Time Fields (i.e. 5:30pm)
+			%td @dennischan
+			%td May 18, 2015
+		%tr.requirement
+			%td{:colspan => "1"} 7
+			%td{:colspan => "1"} Open
+			%td{:colspan => "3"}
+				%b.userstory If This, Then That Contols
+		%tr.open
+			%td 7.1
+			%td.indicator Open
+			%td
+				Add if Probability Attending Input Field is Equal to or Less than, Aggregate Probably Attending Score, then boolean Push = TRUE - else FALSE
+			%td @dennischan
+			%td May 18, 2015
+		%tr.open
+			%td 7.2
+			%td.indicator Open
+			%td
+				If boolean Push = True then Display Push Button.
+			%td @dennischan
+			%td May 18, 2015
+		%tr.open
+			%td 7.3
+			%td.indicator Open
+			%td
+				If PUSH Button Clicked, Then display "push notice received" on each person object & display JOIN Button
+			%td @dennischan
+			%td May 18, 2015
+		%tr.open
+			%td 7.3
+			%td.indicator Open
+			%td
+				If JOIN Button Clicked, then increase JOINED Count.
 			%td @dennischan
 			%td May 18, 2015

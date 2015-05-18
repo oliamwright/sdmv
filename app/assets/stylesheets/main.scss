@@ -283,6 +283,12 @@ tr.ignore {
 	color: #fff;
 	display: inline;
 }
+.notice {
+	background: hotpink;
+	color: #fff;
+	display: inline-block;
+	margin: 10px 0px;
+}
 //--IMG--//
 .thumbnail-small {
 	width: 75px;
@@ -627,4 +633,7 @@ input.chat{
 		min-width: 80px;
 		text-align: center;
 	}
+}
+.desc {
+	width: 500px;
 }
