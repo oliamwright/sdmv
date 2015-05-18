@@ -8,20 +8,18 @@
 			.key.key1#title_keyword1.inline 
 			.key.key2#title_keyword2.inline
 			Group
+			.start.inline 
+				starts at
+				%span#avg_availability
+			.venue.inline
+				at
+				Venue #
+				%span#max_venue
 			%br
 			.intlvl.inline
 				%b interest:
 				%span#avg_int
 				%span %
-			%br	
-			.start.inline 
-				%b starts:
-				%span#avg_availability
-			%br
-			.venue.inline
-				%b location:
-				Venue #
-				%span#max_venue
 			%br
 			.inflvl.inline 
 				%b influence:
@@ -29,19 +27,29 @@
 		
 	.grid_4
 		%h2 
-			.inflvl.inline 
+			.possatt.inline 
 				%b possibly attending: 
 				1
 				%span#poss_attending
 				.note if interest is greater than 0% then flag as attending 
 			%br
-			.inflvl.inline 
+			.probatt.inline 
 				%b probably attending:
 				2
 				%span#prob_attending
 				.note if interest is greater than 50% then flag as attending 
+			%br
+			.joined.inline
+				%b joined:
+				0
 	.grid_4
 		#container{:style => "height: 320px; margin: 0 auto;"}
+	.grid_12
+		%hr
+		If Probably Attending is Greater than 
+		%input
+		Then Push = 
+		%b True
 	.grid_12
 		.note Take Top Keyword 1 + Top Keyword 2 from News & Social, and find the average value between Availability, and choose Venue with highest weight, and show average of influence and interest levels.
 		%hr
