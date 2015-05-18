@@ -98,8 +98,11 @@ $(document).ready(function() {
       }
 
       sum_int += similarity_percent;
-      $('#person_int_lvl' + j).text(similarity_percent);
-      $('#venue' + j + '_int' + i).html((similarity_percent / 100).toFixed(1));
+      $('#person_int_lvl' + j).text(similarity_percent.toFixed(1));
+
+      for (var i = 1; i <= 3; i++) {
+        $('#venue' + i + '_int' + j).html((similarity_percent / 100).toFixed(1));
+      }
     }
 
     $('#avg_int').html((sum_int / 3).toFixed(1));
@@ -163,6 +166,7 @@ $(document).ready(function() {
   // Person1 keywords
   $('#person_keywords1, #person_keywords2, #person_keywords3').on('blur', function() {
     calculate_social_person();
+    calculate_venue_val();
   });
 
   $('#person_location_x1, #person_location_y1, #venue_x1, #venue_y1,' +
