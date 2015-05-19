@@ -42,3 +42,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'thin'
 gem 'pry', :group => :development
+
+gem 'rspec-rails', group: [:development, :test]
