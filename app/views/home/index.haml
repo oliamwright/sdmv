@@ -2,8 +2,6 @@
 	.grid_12
 		%h1 SDMV
 		%hr
-		/
-			comment here
 	.grid_6
 		INT LVL needs to be greater than:
 		%br
@@ -13,11 +11,12 @@
 		%hr
 		INT LVL needs to be greater than:
 		%br
-		%input#probably_attending_base{:value => ".5"} 
+		%input#probably_attending_base{:value => ".49"} 
 		%br
 		to = Probably Attending
 		%hr
 		If Probably of Attending # is Greater than 
+		%br
 		%input#push_available{:value => "2"}
 		%br
 		Then Push = 
@@ -28,22 +27,6 @@
 		.btn#push_notice{:style => "display: none;"} Push Notice
 		%br
 		.notice Push Notification Sent
-	.grid_4
-		%h2 
-			.intlvl.inline
-				%b interest:
-				%span#avg_int
-				%span %
-			%br
-			.inflvl.inline 
-				%b influence:
-				%span#avg_influence
-			%br
-			.inflvl.inline 
-				%b Starts In:
-				/ 01:15:32
-				%span#starts_in
-		%hr
 		%h2 
 			.possatt.inline 
 				%b possibly attending: 
@@ -60,66 +43,10 @@
 			.joined.inline
 				%b joined:
 				0
-	.grid_4
-		#container{:style => "height: 320px; margin: 0 auto;"}
 	.grid_6
-		.case
-		.mob
-			.header
-				.logo sdmv
-			.body
-				.title
-					The
-					.key.key1#title_keyword1.inline 
-					.key.key2#title_keyword2.inline
-					Group
-				.starting
-					.start.inline 
-						Starting in
-						%b 
-							%span#avg_availability 1:18:23
-				.location
-					.venue.inline
-						%b 1.1
-						miles away
-				.small 
-					%b @ Venue #
-					%span#max_venue
-			.stats
-				%table
-					%tr
-						%td.chart
-						
-						%td.details
-							%table
-								%tr
-									%td.half.tright.pad
-										%b interest:
-									%td.half.tleft
-										%span#avg_int
-								%tr
-									%td.tright.pad
-										%b influence:
-									%td.tleft
-										%span#avg_influence
-								%tr
-									%td.tright.pad
-										.possatt.inline 
-											%b not likely: 
-									%td.tleft
-										1
-								%tr
-									%td.tright.pad
-										.possatt.inline 
-											%b likely:
-									%td.tleft
-										2
-								%tr
-									%td.tright.pad
-										.possatt.inline 
-											%b joined:
-									%td.tleft
-										0
+
+		#container{:style => "height: 320px; margin: 0 auto;"}
+
 	.grid_12
 		.note Take Top Keyword 1 + Top Keyword 2 from News & Social, and find the average value between Availability, and choose Venue with highest weight, and show average of influence and interest levels.
 		%hr
@@ -159,15 +86,15 @@
 			%h3 Person #1
 			%h4 Location (X,Y)
 			%input#person_location_x1.loc.numeric{:value => "1"}
-			%input#person_location_y1.loc.numeric{:value => "2"}
+			%input#person_location_y1.loc.numeric{:value => "1"}
 			%br
 			.note Allow for any number: for example 100.5 or -100.5 to be entered into the X,Y Location Fields
 			%h4 Influence (higher is better)
 			%input#influence1.requirement.numeric{:value => "500"}
 			.note Allow for any number: for example 100.5 or -100.5 to be entered into the Influence Field
 			%h4 Availability Range
-			%input#person1_availability_min.time{:value => "4"}
-			%input#person1_availability_max.time{:value => "6"}
+			%input#person1_availability_min.time{:value => "4:00"}
+			%input#person1_availability_max.time{:value => "6:00"}
 			%br
 			.note Allow for any number: for example 100.5 or -100.5 to be entered into the Availability Field
 			%hr
@@ -184,12 +111,12 @@
 			%h3 Person #2
 			%h4 Location (X,Y)
 			%input#person_location_x2.loc.numeric{:value => "2"}
-			%input#person_location_y2.loc.numeric{:value => "2"}
+			%input#person_location_y2.loc.numeric{:value => "1"}
 			%h4 Influence (higher is better)
 			%input#influence2.requirement{:value => "500"}
 			%h4 Availability Range
-			%input#person2_availability_min.time{:value => "5"}
-			%input#person2_availability_max.time{:value => "6"}
+			%input#person2_availability_min.time{:value => "5:00"}
+			%input#person2_availability_max.time{:value => "6:00"}
 			%hr
 			%h4 Keywords
 			%input#person_keywords2.requirement{:value => "japan, earthquake"}
@@ -202,13 +129,13 @@
 		.box
 			%h3 Person #3
 			%h4 Location (X,Y)
-			%input#person_location_x3.loc.numeric{:value => "3"}
+			%input#person_location_x3.loc.numeric{:value => "1"}
 			%input#person_location_y3.loc.numeric{:value => "2"}
 			%h4 Influence (higher is better)
 			%input#influence3.requirement.numeric{:value => "500"}
 			%h4 Availability Range
-			%input#person3_availability_min.time{:value => "4"}
-			%input#person3_availability_max.time{:value => "7"}
+			%input#person3_availability_min.time{:value => "4:00"}
+			%input#person3_availability_max.time{:value => "7:00"}
 			%hr
 			%h4 Keywords
 			%input#person_keywords3.requirement{:value => "japan"}
@@ -223,8 +150,8 @@
 		.box
 			%h3 Venue #1
 			%h4 Location (X,Y)
-			%input#venue_x1.loc.numeric{:value => "2"}
-			%input#venue_y1.loc.numeric{:value => "1"}
+			%input#venue_x1.loc.numeric{:value => "1.5"}
+			%input#venue_y1.loc.numeric{:value => "1.5"}
 			%br
 			.note Allow for any number for example 100.5 or -100.5 to be entered into the X,Y fields
 			%table.full.list
@@ -274,8 +201,8 @@
 		.box
 			%h3 Venue #2
 			%h4 Location (X,Y)
-			%input#venue_x2.loc.numeric{:value => "2"}
-			%input#venue_y2.loc.numeric{:value => "2"}
+			%input#venue_x2.loc.numeric{:value => "-1"}
+			%input#venue_y2.loc.numeric{:value => "-1"}
 			%table.full.list
 				%tr
 					%th Person
@@ -311,8 +238,8 @@
 		.box
 			%h3 Venue #3
 			%h4 Location (X,Y)
-			%input#venue_x3.loc.numeric{:value => "1"}
-			%input#venue_y3.loc.numeric{:value => "2"}
+			%input#venue_x3.loc.numeric{:value => "3"}
+			%input#venue_y3.loc.numeric{:value => "3"}
 			%table.full.list
 				%tr
 					%th Person
@@ -346,3 +273,5 @@
 					%td#venue_val_sum3 67.8
 	.grid_12
 		= render :partial => 'shared/tasks'
+= render :partial => 'shared/mob'
+

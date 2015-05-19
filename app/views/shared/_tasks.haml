@@ -23,9 +23,9 @@
 			%td Tie together Person X,Y Location Attributes with Dynamic HighCharts Data
 			%td @dennischan
 			%td May 18, 2015
-		%tr.open
+		%tr.ignore
 			%td 1.3
-			%td.indicator Open
+			%td.indicator Ignore
 			%td Tie together headerFormat: '<b>{series.name}</b>' to be Person Identifier i.e. Person #1
 			%td @dennischan
 			%td May 18, 2015
@@ -64,6 +64,18 @@
 			%td Add "Event Starts in 00:15:31" and make it countdown in real time. Make it based on local computer time.
 			%td @dennischan
 			%td May 18, 2015
+		%tr
+			%td 2.4
+			%td.indicator Open
+			%td Pardon Also showcase Event Start Time. I would still like that datapoint.
+			%td @dennischan
+			%td May 19, 2015
+		%tr.open
+			%td 2.4
+			%td.indicator Open
+			%td Change operator INT LVL needs to be "greater than:" to "Greater Than or Equal to:"
+			%td @dennischan
+			%td May 19, 2015
 		%tr.requirement
 			%td{:colspan => "1"} 3
 			%td{:colspan => "1"} 
@@ -150,12 +162,19 @@
 			%td @dennischan
 			%td May 18, 2015
 		%tr.open
-			%td 5.4
+			%td 5.5
 			%td.indicator Open
 			%td
 				Exclude Venue as an Option if Start Time does not fall between Open Times
 			%td @dennischan
 			%td May 18, 2015
+		%tr.open
+			%td 5.6
+			%td.indicator Open
+			%td
+				Change all "Venue" Labels and indicators for "Location"
+			%td @dennischan
+			%td May 19, 2015
 		%tr.requirement
 			%td{:colspan => "1"} 6
 			%td{:colspan => "1"} 
@@ -227,3 +246,55 @@
 				Have News Reader Poll Feeds Periodicly. 
 			%td @dennischan
 			%td May 18, 2015
+		%tr.requirement
+			%td{:colspan => "1"} 9
+			%td{:colspan => "1"} 
+			%td{:colspan => "3"}
+				%b.userstory Core Calculations - 
+				The goal of the application is to identify disasters around the world and help people find 
+				locations where they can help as fast as possible based on their interest and availability.
+				The System should calculate in several checkpoints to determine validity.
+		%tr.open
+			%td 9.1
+			%td.indicator Open
+			%td Is a Topic Category Trending in News? i.e. "Nepal Earthquake" should be a keyword combination that is identifiable in the News and growing in frequency, volume and density. (We need Weighted Topic Clusters.)
+			%td @alexetkin
+			%td May 19, 2015
+		%tr.open
+			%td 9.2
+			%td.indicator Open
+			%td Is a Topic Category Trending in Social Media? i.e. "Nepal Earthquake" should be a keyword combination that is identifiable in Social Media and growing in frequency, volume and density. (We need Weighted Topic Clusters.)
+			%td @alexetkin
+			%td May 19, 2015
+		%tr.open
+			%td 9.3
+			%td.indicator Open
+			%td TRIGGER 1: Do Social Media Trends validate the importance of News Trends? - If Yes. Then identify People who may be interested.
+			%td @alexetkin
+			%td May 19, 2015
+		%tr.open
+			%td 9.4
+			%td.indicator Open
+			%td Based on Person Availability, Interest Level and Distance from Venues, what is the proability of People attending a Location?
+			%td @alexetkin
+			%td May 19, 2015
+		%tr.open
+			%td 9.5
+			%td.indicator Open
+			%td 
+				A Persons Influence Level and proximity to a Venue should increase the value of that Venue. 
+				i.e. if the Director of Emergency Response is closer to Venue A, than Venue B - but 10 volunteers are closer to Venue B,
+				which Venue should be chosen?
+			%td @alexetkin
+			%td May 19, 2015
+		%tr.open
+			%td 9.5
+			%td.indicator Open
+			%td 
+				The Distance a person should travel to a Venue should be considered. i.e. If Venue is 1 Hour Away, and Person is only 
+				available for 1 hour then the probability score of Person's Attendance should be reduced. 
+				%b EXAMPLE: 
+				Venue A is 1 hour away and its 4:00pm & Person is only available between 1:00pm - 5:00pm, then they will arrive at 5pm, therefore
+				they should not be considered.
+			%td @alexetkin
+			%td May 19, 2015
