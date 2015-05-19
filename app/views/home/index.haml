@@ -1,22 +1,8 @@
-.container_12
+.container_12.service
 	.grid_12
 		%h1 SDMV
 		%hr
-	.grid_12
-		%h2
-			The
-			.key.key1#title_keyword1.inline 
-			.key.key2#title_keyword2.inline
-			Group
-			.start.inline 
-				starts at
-				%span#avg_availability
-			.venue.inline
-				at
-				Venue #
-				%span#max_venue
-		%hr
-	.grid_4
+	.grid_6
 		INT LVL needs to be greater than:
 		%br
 		%input{:value => ".1"} 
@@ -29,7 +15,8 @@
 		%br
 		to = Probably Attending
 		%hr
-		If Probably of Attending # is Greater than 
+		If Probably of Attending # is Greater than
+		%br
 		%input{:value => "2"}
 		%br
 		Then Push = 
@@ -40,41 +27,66 @@
 		.btn Push Notice
 		%br
 		.notice Push Notification Sent
-	.grid_4
-		%h2 
-			.intlvl.inline
-				%b interest:
-				%span#avg_int
-				%span %
-			%br
-			.inflvl.inline 
-				%b influence:
-				%span#avg_influence
-			%br
-			.inflvl.inline 
-				%b Starts In:
-				01:15:32
-				%span#starts_in
-		%hr
-		%h2 
-			.possatt.inline 
-				%b possibly attending: 
-				1
-				%span#poss_attending
-				.note if interest is greater than 0% then flag as possibly attending 
-			%br
-			.probatt.inline 
-				%b probably attending:
-				2
-				%span#prob_attending
-				.note if interest is greater than 50% then flag as probably attending 
-			%br
-			.joined.inline
-				%b joined:
-				0
-	.grid_4
+	.grid_6
 		#container{:style => "height: 320px; margin: 0 auto;"}
-
+	.grid_6
+		.case
+		.mob
+			.header
+				.logo sdmv
+			.body
+				.title
+					The
+					.key.key1#title_keyword1.inline 
+					.key.key2#title_keyword2.inline
+					Group
+				.starting
+					.start.inline 
+						Starting in
+						%b 
+							%span#avg_availability 1:18:23
+				.location
+					.venue.inline
+						%b 1.1
+						miles away
+				.small 
+					%b @ Venue #
+					%span#max_venue
+			.stats
+				%table
+					%tr
+						%td.chart
+						
+						%td.details
+							%table
+								%tr
+									%td.half.tright.pad
+										%b interest:
+									%td.half.tleft
+										%span#avg_int
+								%tr
+									%td.tright.pad
+										%b influence:
+									%td.tleft
+										%span#avg_influence
+								%tr
+									%td.tright.pad
+										.possatt.inline 
+											%b not likely: 
+									%td.tleft
+										1
+								%tr
+									%td.tright.pad
+										.possatt.inline 
+											%b likely:
+									%td.tleft
+										2
+								%tr
+									%td.tright.pad
+										.possatt.inline 
+											%b joined:
+									%td.tleft
+										0
 	.grid_12
 		.note Take Top Keyword 1 + Top Keyword 2 from News & Social, and find the average value between Availability, and choose Venue with highest weight, and show average of influence and interest levels.
 		%hr
@@ -262,7 +274,6 @@
 					%td 
 					%td 
 					%td#venue_val_sum2 113.6
-			.error It appears interest level doesn't always update
 					
 		.box
 			%h3 Venue #3
