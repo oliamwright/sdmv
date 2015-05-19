@@ -7,29 +7,60 @@
 	.grid_6
 		INT LVL needs to be greater than:
 		%br
-		%input{:value => ".1"} 
+		%input#possibly_attending_base{:value => ".1"} 
 		%br
 		to = Possibly Attending
 		%hr
 		INT LVL needs to be greater than:
 		%br
-		%input{:value => ".5"} 
+		%input#probably_attending_base{:value => ".5"} 
 		%br
 		to = Probably Attending
 		%hr
-		If Probably of Attending # is Greater than
-		%br
-		%input{:value => "2"}
+		If Probably of Attending # is Greater than 
+		%input#push_available{:value => "2"}
 		%br
 		Then Push = 
 		%b TRUE
 		%hr
 		If Push = TRUE, then display
 		%br
-		.btn Push Notice
+		.btn#push_notice{:style => "display: none;"} Push Notice
 		%br
 		.notice Push Notification Sent
-	.grid_6
+	.grid_4
+		%h2 
+			.intlvl.inline
+				%b interest:
+				%span#avg_int
+				%span %
+			%br
+			.inflvl.inline 
+				%b influence:
+				%span#avg_influence
+			%br
+			.inflvl.inline 
+				%b Starts In:
+				/ 01:15:32
+				%span#starts_in
+		%hr
+		%h2 
+			.possatt.inline 
+				%b possibly attending: 
+				%span#possibly_attending 1
+				%span#poss_attending
+				.note if interest is greater than 0% then flag as possibly attending 
+			%br
+			.probatt.inline 
+				%b probably attending:
+				%span#probably_attending 2
+				%span#prob_attending
+				.note if interest is greater than 50% then flag as probably attending 
+			%br
+			.joined.inline
+				%b joined:
+				0
+	.grid_4
 		#container{:style => "height: 320px; margin: 0 auto;"}
 	.grid_6
 		.case

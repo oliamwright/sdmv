@@ -1,5 +1,13 @@
 $(document).ready(function() {
 
+  update_charts();
+
+  // Initialize countdown timer
+  countdown = 60 * 10,
+  display = $('#starts_in');
+  startTimer(countdown, display);
+
+  // Initialize keywords
   news_keywords = [];
   social_keywords = [];
 
@@ -163,6 +171,21 @@ $(document).ready(function() {
     }
   }
 
+  // Update Highcharts when Person Location and Venue Location are updated
+  function update_charts() {
+    chart = $('#container').highcharts();
+
+    person_data = [];
+    venue_data = [];
+
+    for (var i = 1; i <= 3; i++) {
+      person_data.push([parseFloat($('#person_location_x' + i).val()), parseFloat($('#person_location_y' + i).val())]);
+      venue_data.push([parseFloat($('#venue_x' + i).val()), parseFloat($('#venue_y' + i).val())]);
+    }
+    chart.series[0].setData(person_data);
+    chart.series[1].setData(venue_data);
+  }
+
   // Person1 keywords
   $('#person_keywords1, #person_keywords2, #person_keywords3').on('blur', function() {
     calculate_social_person();
@@ -176,6 +199,7 @@ $(document).ready(function() {
 
     calculate_venue_dist();
     calculate_venue_val();
+    update_charts();
   })
 
   $('#influence1, #influence2, #influence3').on('blur', function() {
@@ -197,8 +221,8 @@ $(document).ready(function() {
     '#person2_availability_min, #person2_availability_max' + 
     '#person3_availability_min, #person3_availability_max').on('blur', function() {
 
-   if (isNaN($(this).val())) {
-      alert('Please input numeric value.');
+   if (!this.value.match(/^([01]?[0-9]|2[0-3]):[0-5][0-9]/)) {
+      alert('Please input the value in time format.');
       $(this).focus();  
     } else {
       p1_min = isNaN($('#person1_availability_min').val()) ? 0 : parseFloat($('#person1_availability_min').val());
@@ -218,78 +242,32 @@ $(document).ready(function() {
       $('#avg_availability').html(avg.toFixed(1));
     }
   })
+
+  $('#possibly_attending_base, #probably_attending_base').on('blur', function() {
+    if (isNaN($(this).val())) {
+      alert('Please input numeric value');
+      $(this).focus();
+    } else {
+      possibly_attending = 0;
+      probably_attending = 0;
+      for (var i = 1; i <= 3; i++) {
+        if (parseFloat($('#person_int_lvl' + i).html() / 100) > $('#possibly_attending_base').val()) {
+          possibly_attending ++;
+        }
+
+        if (parseFloat($('#person_int_lvl' + i).html() / 100) > $('#probably_attending_base').val()) {
+          probably_attending ++;
+        }
+      }
+
+      $('#possibly_attending').html(possibly_attending);
+      $('#probably_attending').html(probably_attending);
+
+      if (probably_attending > $('#push_available').val()) {
+        $('#push_notice').css('display', '');
+      } else {
+        $('#push_notice').css('display', 'none');
+      }
+    }
+  })
 });
-
-$(function () {
-    $('#container').highcharts({
-        chart: {
-            type: 'scatter',
-            zoomType: 'xy'
-        },
-        title: {
-            text: 'Person & Venue Location'
-        },
-        subtitle: {
-            text: ''
-        },
-        xAxis: {
-            title: {
-                enabled: true,
-                text: 'X'
-            },
-            startOnTick: true,
-            endOnTick: true,
-            showLastLabel: true
-        },
-        yAxis: {
-            title: {
-                text: 'Y'
-            }
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'left',
-            verticalAlign: 'top',
-            x: 100,
-            y: 70,
-            floating: true,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
-            borderWidth: 1
-        },
-        plotOptions: {
-            scatter: {
-                marker: {
-                    radius: 5,
-                    states: {
-                        hover: {
-                            enabled: true,
-                            lineColor: 'rgb(100,100,100)'
-                        }
-                    }
-                },
-                states: {
-                    hover: {
-                        marker: {
-                            enabled: false
-                        }
-                    }
-                },
-                tooltip: {
-                    headerFormat: '<b>{series.name}</b><br>',
-                    pointFormat: '{point.x} x, {point.y} y'
-                }
-            }
-        },
-        series: [{
-            name: 'Person',
-            color: 'rgba(223, 83, 83, .5)',
-            data: [[1, 2], [2, 2], [0, 0]]
-
-        }, {
-            name: 'Venue',
-            color: 'rgba(119, 152, 191, .5)',
-            data: [[3, 1], [3, 3], [-1, -1]]
-        }]
-    });
-});
-
