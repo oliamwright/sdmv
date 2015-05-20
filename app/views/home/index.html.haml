@@ -107,44 +107,23 @@
       .note Compare the similarity between Social and Person Keywords
       .notice Push Notification Received
       .add + Join
+
+    = render :partial => 'person_values/list', locals: { person: @peoples }
+
     .box
-      %h3 Person #2
-      %h4 Location (X,Y)
-      %input#person_location_x2.loc.numeric{:value => "2"}
-      %input#person_location_y2.loc.numeric{:value => "1"}
-      %h4 Influence (higher is better)
-      %input#influence2.requirement{:value => "500"}
-      %h4 Availability Range
-      %input#person2_availability_min.time{:value => "5:00"}
-      %input#person2_availability_max.time{:value => "6:00"}
-      %hr
-      %h4 Keywords
-      %input#person_keywords2.requirement{:value => "japan, earthquake"}
-      %p.sum
-        INT LVL = 
-        %span#person_int_lvl2 0
-        %span %
-      .notice Push Notification Received
-      .add + Join
-    .box
-      %h3 Person #3
-      %h4 Location (X,Y)
-      %input#person_location_x3.loc.numeric{:value => "1"}
-      %input#person_location_y3.loc.numeric{:value => "2"}
-      %h4 Influence (higher is better)
-      %input#influence3.requirement.numeric{:value => "500"}
-      %h4 Availability Range
-      %input#person3_availability_min.time{:value => "4:00"}
-      %input#person3_availability_max.time{:value => "7:00"}
-      %hr
-      %h4 Keywords
-      %input#person_keywords3.requirement{:value => "japan"}
-      %p.sum
-        INT LVL = 
-        %span#person_int_lvl3 0
-        %span %
-      .notice Push Notification Received
-      .add + Join
+      %h3 New Person
+      = form_for @person_value, remote: true, format: :js do |f|
+        %h4 Location (X,Y)
+        = f.text_field :x, class: "loc numeric"
+        = f.text_field :y, class: "loc numeric"
+        %h4 Influence (higher is better)
+        = f.text_field :influence, class: "loc numeric"
+        %h4 Availability Range
+        = f.text_field :availability_from, class: "time"
+        = f.text_field :availability_to, class: "time"
+        %h4 Keywords
+        = f.text_field :keywords, class: "requirement"
+        = f.submit 'Add'
   .grid_3
     %h2 Venue
     .box

@@ -16,6 +16,7 @@ class VenuesController < ApplicationController
 
   def update
     venue = Venue.find(params["id"])
+    binding.pry
     venue.update_attributes(:x => params["venue"]["x"], :y => params["venue"]["y"])
 
     respond_to do |format|  
@@ -25,6 +26,7 @@ class VenuesController < ApplicationController
   end
 
   def destroy
+    binding.pry
     Venue.destroy(params["id"])
 
     respond_to do |format|

@@ -3,11 +3,11 @@
     .box
       %h3= "Venue #" + venue.id.to_s
       %h4 Location (X,Y)
-      = form_for venue, method: :put, remote: true do |f|
+      = form_for venue, method: :patch, remote: true do |f|
         = f.text_field :x, :value => venue.x, class: "loc numeric"
         = f.text_field :y, :value => venue.y, class: "loc numeric"
         = f.submit 'Update'
-        = button_to 'Delete', venue, method: :delete, remote: true, data: { confirm: 'Are you sure?' }
+      = button_to 'Delete', venue, method: :delete, remote: true, data: { confirm: 'Are you sure?' }
       %table.full.list
         %tr
           %th Person
