@@ -245,17 +245,16 @@ $(document).ready(function() {
 
   $('#possibly_attending_base, #probably_attending_base').on('blur', function() {
     if (isNaN($(this).val())) {
-      alert('Please input numeric value');
       $(this).focus();
     } else {
       possibly_attending = 0;
       probably_attending = 0;
       for (var i = 1; i <= 3; i++) {
-        if (parseFloat($('#person_int_lvl' + i).html() / 100) > $('#possibly_attending_base').val()) {
+        if (parseFloat($('#person_int_lvl' + i).html() / 100) >= $('#possibly_attending_base').val()) {
           possibly_attending ++;
         }
 
-        if (parseFloat($('#person_int_lvl' + i).html() / 100) > $('#probably_attending_base').val()) {
+        if (parseFloat($('#person_int_lvl' + i).html() / 100) >= $('#probably_attending_base').val()) {
           probably_attending ++;
         }
       }
@@ -263,11 +262,23 @@ $(document).ready(function() {
       $('#possibly_attending').html(possibly_attending);
       $('#probably_attending').html(probably_attending);
 
-      if (probably_attending > $('#push_available').val()) {
-        $('#push_notice').css('display', '');
-      } else {
-        $('#push_notice').css('display', 'none');
-      }
+      display_push_button($('#push_available').val());
+    }
+  })
+
+  function display_push_button(val) {
+    if (parseFloat($('#probably_attending').html()) >= val) {
+      $('#push_notice').css('display', '');
+    } else {
+      $('#push_notice').css('display', 'none'); 
+    }
+  }
+
+  $('#push_available').on('blur', function() {
+    if (isNaN($(this).val())) {
+      $(this).focus();
+    } else {
+      display_push_button($(this).val());
     }
   })
 });

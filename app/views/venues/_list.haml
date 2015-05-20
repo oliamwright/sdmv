@@ -1,0 +1,41 @@
+#venue_section
+  - venues.each do |venue|
+    .box
+      %h3= "Venue #" + venue.id.to_s
+      %h4 Location (X,Y)
+      = form_for venue, method: :put, remote: true do |f|
+        = f.text_field :x, :value => venue.x, class: "loc numeric"
+        = f.text_field :y, :value => venue.y, class: "loc numeric"
+        = f.submit 'Update'
+        = button_to 'Delete', venue, method: :delete, remote: true, data: { confirm: 'Are you sure?' }
+      %table.full.list
+        %tr
+          %th Person
+          %th DIST
+          %th INT
+          %th INF
+          %th VAL
+        %tr
+          %td Person #1
+          %td#venue3_dist1 3
+          %td#venue3_int1 .5
+          %td#venue3_influence1 100
+          %td#venue3_val1 16.7
+        %tr
+          %td Person #2
+          %td#venue3_dist2 7
+          %td#venue3_int2 .2
+          %td#venue3_influence2 200
+          %td#venue3_val2 5.7
+        %tr
+          %td Person #3
+          %td#venue3_dist3 11
+          %td#venue3_int3 .1
+          %td#venue3_influence3 500
+          %td#venue3_val3 45.5
+        %tr.sum
+          %td 
+          %td#venue_dist_sum3 10
+          %td 
+          %td 
+          %td#venue_val_sum3 67.8

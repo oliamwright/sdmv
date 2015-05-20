@@ -18,4 +18,7 @@ Rails.application.routes.draw do
 
   post '/news', :to => 'data#news', :as => 'news'
   post '/social', :to => 'data#social', :as => 'social'
+
+  resources :venues, only: [:create, :edit, :update, :destroy]
+  # resources :persons, only: [:create, :edit, :update, :destroy]
 end

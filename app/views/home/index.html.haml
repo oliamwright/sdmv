@@ -1,0 +1,214 @@
+.container_12.service
+  .grid_12
+    %h1 SDMV
+    %hr
+  .grid_6
+    INT LVL needs to be greater than:
+    %br
+    %input#possibly_attending_base{:value => ".1"} 
+    %br
+    to = Possibly Attending
+    %hr
+    INT LVL needs to be greater than:
+    %br
+    %input#probably_attending_base{:value => ".49"} 
+    %br
+    to = Probably Attending
+    %hr
+    If Probably of Attending # is Greater than 
+    %br
+    %input#push_available{:value => "2"}
+    %br
+    Then Push = 
+    %b TRUE
+    %hr
+    If Push = TRUE, then display
+    %br
+    .btn#push_notice{:style => "display: none;"} Push Notice
+    %br
+    .notice Push Notification Sent
+    %h2 
+      .possatt.inline 
+        %b possibly attending: 
+        %span#possibly_attending 1
+        %span#poss_attending
+        .note if interest is greater than 0% then flag as possibly attending 
+      %br
+      .probatt.inline 
+        %b probably attending:
+        %span#probably_attending 2
+        %span#prob_attending
+        .note if interest is greater than 50% then flag as probably attending 
+      %br
+      .joined.inline
+        %b joined:
+        0
+  .grid_6
+
+    #container{:style => "height: 320px; margin: 0 auto;"}
+
+  .grid_12
+    .note Take Top Keyword 1 + Top Keyword 2 from News & Social, and find the average value between Availability, and choose Venue with highest weight, and show average of influence and interest levels.
+    %hr
+  .grid_3
+    %h2 News
+    .box
+      %h3 News Source #1
+      %textarea#news.news{} Nepal earthquake Death toll passes 4,800 as rescuers in nepal face challenges. More than 4,800 people dead. More than 9,200 injured. Eight million affected across Nepal. One million children urgently in need of help. Those are the startling numbers that indicate the scale of the devastation from the huge earthquake that struck the Himalayan nation on Saturday.
+      %h3 Exclusions
+      %textarea#exclusion.social{}the,and,those,are,that,of,more,than,.,in,more,are,on,a,to,as,1,2,3,4,5,6,7,8,9,0
+      %h4 Top 5 Keywords by Density
+      %ul#news_result
+        / %li Nepal (6)
+        / %li Earthquake (4)
+        / %li Help (3)
+        / %li Dead (2)
+        / %li Affected (2)
+      .note Calculate the top 5 keywords from the textarea above, excluding the exclusion list.
+  .grid_3
+    %h2 Social
+    .box
+      %h3 Social Source - TimeStamp #1
+      %textarea#social.social{} nepal,nepal,nepal,earthquake,earthquake
+      %h4 Top 5 Keywords by Density
+      %ul#social_result
+        / %li Nepal (3)
+        / %li Earthquake (2)
+        / %li Help (0)
+        / %li Dead (0)
+        / %li Affected (0)
+      %p.sum
+        %span#social_news_comp Social / News Keyword Comp = 0%
+      .note Calculate the top 5 keywords from the textarea above, and compare the similarity between News Keywords and Social Keywords
+  .grid_3
+    %h2 Person
+    .box
+      %h3 Person #1
+      %h4 Location (X,Y)
+      %input#person_location_x1.loc.numeric{:value => "1"}
+      %input#person_location_y1.loc.numeric{:value => "1"}
+      %br
+      .note Allow for any number: for example 100.5 or -100.5 to be entered into the X,Y Location Fields
+      %h4 Influence (higher is better)
+      %input#influence1.requirement.numeric{:value => "500"}
+      .note Allow for any number: for example 100.5 or -100.5 to be entered into the Influence Field
+      %h4 Availability Range
+      %input#person1_availability_min.time{:value => "4:00"}
+      %input#person1_availability_max.time{:value => "6:00"}
+      %br
+      .note Allow for any number: for example 100.5 or -100.5 to be entered into the Availability Field
+      %hr
+      %h4 Keywords
+      %input#person_keywords1.requirement{:value => "nepal, earthquake"}
+      %p.sum
+        INT LVL = 
+        %span#person_int_lvl1 0
+        %span %
+      .note Compare the similarity between Social and Person Keywords
+      .notice Push Notification Received
+      .add + Join
+    .box
+      %h3 Person #2
+      %h4 Location (X,Y)
+      %input#person_location_x2.loc.numeric{:value => "2"}
+      %input#person_location_y2.loc.numeric{:value => "1"}
+      %h4 Influence (higher is better)
+      %input#influence2.requirement{:value => "500"}
+      %h4 Availability Range
+      %input#person2_availability_min.time{:value => "5:00"}
+      %input#person2_availability_max.time{:value => "6:00"}
+      %hr
+      %h4 Keywords
+      %input#person_keywords2.requirement{:value => "japan, earthquake"}
+      %p.sum
+        INT LVL = 
+        %span#person_int_lvl2 0
+        %span %
+      .notice Push Notification Received
+      .add + Join
+    .box
+      %h3 Person #3
+      %h4 Location (X,Y)
+      %input#person_location_x3.loc.numeric{:value => "1"}
+      %input#person_location_y3.loc.numeric{:value => "2"}
+      %h4 Influence (higher is better)
+      %input#influence3.requirement.numeric{:value => "500"}
+      %h4 Availability Range
+      %input#person3_availability_min.time{:value => "4:00"}
+      %input#person3_availability_max.time{:value => "7:00"}
+      %hr
+      %h4 Keywords
+      %input#person_keywords3.requirement{:value => "japan"}
+      %p.sum
+        INT LVL = 
+        %span#person_int_lvl3 0
+        %span %
+      .notice Push Notification Received
+      .add + Join
+  .grid_3
+    %h2 Venue
+    .box
+      %h3 Venue #1
+      %h4 Location (X,Y)
+      %input#venue_x1.loc.numeric{:value => "1.5"}
+      %input#venue_y1.loc.numeric{:value => "1.5"}
+      %br
+      .note Allow for any number for example 100.5 or -100.5 to be entered into the X,Y fields
+      %table.full.list
+        %tr
+          %th Person
+          %th DIST
+          %th INT
+          %th INF
+          %th VAL
+        %tr
+          %td Person #1
+          %td#venue1_dist1 2.8
+          %td#venue1_int1 .5
+          %td#venue1_influence1 100
+          %td#venue1_val1 10.0
+        %tr
+          %td Person #2
+          %td#venue1_dist2 1.0
+          %td#venue1_int2 .2
+          %td#venue1_influence2 200
+          %td#venue1_val2 4.4
+        %tr
+          %td Person #3
+          %td#venue1_dist3 8.5
+          %td#venue1_int3 .1
+          %td#venue1_influence3 500
+          %td#venue1_val3 38.5
+        %tr.sum
+          %td 
+          %td#venue_dist_sum1 12.3
+          %td 
+          %td 
+          %td#venue_val_sum1 52.9
+      .note 
+        %b DIST 
+        = "Calculate Distance Between Person & Venue =SQRT((VenueX-PersonX)^2+(VenueY-PersonY)^2)"
+        %br
+        %b INT
+        Show the interest value of each person
+        %br
+        %b INF
+        Show the influence value of each person
+        %br
+        %b VAL
+        = "Calculate Value by (INT * INF)/DIST"
+        And Showcase the Sum of DIST and VAL
+    = render :partial => 'venues/list', locals: { venues: @venues }
+
+    .box
+      %h3 Venue #3
+      %h4 Location (X,Y)
+      = form_for @venue, remote: true do |f|
+        = f.text_field :x, class: "loc numeric"
+        = f.text_field :y, class: "loc numeric"
+        = f.submit 'Add'
+
+  .grid_12
+    = render :partial => 'shared/tasks'
+= render :partial => 'shared/mob'
+
