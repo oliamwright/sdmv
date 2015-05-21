@@ -1,1 +1,2 @@
 $('#person_section').html("<%= escape_javascript(render partial: 'list', locals: { person_values: @person_values }) %>");
+$('#venue_section').html("<%= escape_javascript(render partial: 'venues/list', locals: { venues: @venues }) %>");

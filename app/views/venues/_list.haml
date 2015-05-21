@@ -15,27 +15,17 @@
           %th INT
           %th INF
           %th VAL
-        %tr
-          %td Person #1
-          %td#venue3_dist1 3
-          %td#venue3_int1 .5
-          %td#venue3_influence1 100
-          %td#venue3_val1 16.7
-        %tr
-          %td Person #2
-          %td#venue3_dist2 7
-          %td#venue3_int2 .2
-          %td#venue3_influence2 200
-          %td#venue3_val2 5.7
-        %tr
-          %td Person #3
-          %td#venue3_dist3 11
-          %td#venue3_int3 .1
-          %td#venue3_influence3 500
-          %td#venue3_val3 45.5
+        - venue.venue_person_values.each_with_index do |vpv, idx|
+          %tr
+            %td= "Person #" + idx.to_s
+            %td= vpv.dist
+            %td= vpv.person_value.int_lvl
+            %td= vpv.person_value.influence
+            %td= vpv.value
         %tr.sum
+          %td
+          %td= venue.sum_dist
           %td 
-          %td#venue_dist_sum3 10
           %td 
-          %td 
-          %td#venue_val_sum3 67.8
+          %td= venue.sum_value
+        

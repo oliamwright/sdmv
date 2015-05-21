@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520171938) do
+ActiveRecord::Schema.define(version: 20150521034355) do
 
   create_table "person_values", force: true do |t|
     t.float    "x",                 limit: 24
@@ -25,11 +25,20 @@ ActiveRecord::Schema.define(version: 20150520171938) do
     t.datetime "updated_at"
   end
 
+  create_table "venue_person_values", force: true do |t|
+    t.integer "venue_id"
+    t.integer "person_value_id"
+    t.float   "dist",            limit: 24
+    t.float   "value",           limit: 24
+  end
+
   create_table "venues", force: true do |t|
     t.float    "x",          limit: 24
     t.float    "y",          limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "sum_dist",   limit: 24
+    t.float    "sum_value",  limit: 24
   end
 
 end

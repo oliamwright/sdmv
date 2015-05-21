@@ -17,7 +17,7 @@
       = button_to 'Delete', person, method: :delete, remote: true, data: { confirm: 'Are you sure?' }
       %p.sum
         INT LVL = 
-        %span#person_int_lvl2 0
+        %span#person_int_lvl2= (person.int_lvl * 100)
         %span %
       .notice Push Notification Received
       .add + Join

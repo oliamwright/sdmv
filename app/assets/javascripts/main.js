@@ -81,6 +81,13 @@ $(document).ready(function() {
     }
   });
 
+  $('.time').on('blur', function() {
+    if (!this.value.match(/^([01]?[0-9]|2[0-3]):[0-5][0-9]/)) {
+      alert('Please input the value in time format.');
+      $(this).focus();  
+    }
+  });
+
   function calculate_social_person () {
     sum_int = 0;
     for (var j = 1 ; j <= 3; j++ ) {

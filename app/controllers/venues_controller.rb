@@ -8,6 +8,8 @@ class VenuesController < ApplicationController
     @venue.y = params["venue"]["y"]
     @venue.save
 
+    update_venue_person
+
     respond_to do |format|
       @venues = Venue.all
       format.js { render action: "show"}
@@ -16,8 +18,9 @@ class VenuesController < ApplicationController
 
   def update
     venue = Venue.find(params["id"])
-    binding.pry
     venue.update_attributes(:x => params["venue"]["x"], :y => params["venue"]["y"])
+
+    update_venue_person
 
     respond_to do |format|  
       @venues = Venue.all
@@ -26,13 +29,17 @@ class VenuesController < ApplicationController
   end
 
   def destroy
-    binding.pry
     Venue.destroy(params["id"])
+
+    update_venue_person
 
     respond_to do |format|
       @venues = Venue.all
       format.js { render action: "show"}
     end
   end
+
+  private
+ 
 
 end
