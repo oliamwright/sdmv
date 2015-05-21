@@ -41,7 +41,8 @@ gem 'unicorn', '4.5.0'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'thin'
-gem 'pry', group: :development
+
+gem 'pry-rails', group: :development
 
 gem 'rspec-rails', group: [:development, :test]
 gem 'simplecov', group: [:test], require: false
