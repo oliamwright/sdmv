@@ -1,9 +1,11 @@
 require 'time_delta'
 
 class TimeRange < TimeDelta
+  NIL_TIME = Time.new(0)
+
   attr_reader :from, :to
 
-  def initialize(from, to)
+  def initialize(from = NIL_TIME, to = NIL_TIME)
     from.is_a? Time and to.is_a? Time or
       fail ArgumentError, 'arguments\' type should be Time'
 
@@ -25,6 +27,31 @@ from #{TimeRange.format_time from} to #{TimeRange.format_time to})"
       "#{humanize options} (\
 from #{TimeRange.format_datetime from} to #{TimeRange.format_datetime to})"
     end
+  end
+
+  def empty?
+    from == to
+  end
+
+  def ==(other)
+    from == other.from && to == other.to || empty? && other.empty?
+  end
+
+  alias_method :eql?, :==
+
+  def &(other)
+    TimeRange.new(
+      [from, other.from].max,
+      [to, other.to].min,
+    )
+  rescue ArgumentError
+    TimeRange.new
+  end
+
+  alias_method :intersection, :&
+
+  def include?(time)
+    from <= time && time < to
   end
 
   def self.format_time(time)
