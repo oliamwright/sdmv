@@ -4,8 +4,8 @@ class DataController < ApplicationController
   # When news value is changed, extract top 5 keywords and calculate simularity
   # When exclusion value is changed, extract top 5 keywords and calculate simularity
   def news
-    exclusion = params[:exclusion].nil? ? "" : params[:exclusion].downcase
-    news = params[:news].nil? ? "" : params[:news].downcase
+    exclusion = params[:exclusion].nil? ? '' : params[:exclusion].downcase
+    news = params[:news].nil? ? '' : params[:news].downcase
 
     # Replace tailing dot with space
     news = news.gsub('.', ' ')
@@ -19,13 +19,11 @@ class DataController < ApplicationController
     news_segment = Hash.new(0)
     news.split(/ /).each do |word|
       # check exclusion array contains a word
-      unless exclusion_list.include? word.strip
-        news_segment[word.strip] += 1
-      end
+      news_segment[word.strip] += 1 unless exclusion_list.include? word.strip
     end
 
     # Sort news hash by word count
-    news_segment = Hash[news_segment.sort_by{|k, v| v}.reverse]
+    news_segment = Hash[news_segment.sort_by { |_k, v| v }.reverse]
 
     news_keywords_array = []
     json_result = {}
@@ -43,18 +41,17 @@ class DataController < ApplicationController
     similarity_obj.news_keywords = news_keywords
     similarity_obj.exclusion = exclusion
 
-    render :json => {
-      :success => true, 
-      :result => json_result.to_json,
-      :news_keywords => news_keywords_array.to_json,
-      :similarity => calc_similarity_keywords
-    }, status: :created and return
+    render(json: {
+             success: true,
+             result: json_result.to_json,
+             news_keywords: news_keywords_array.to_json,
+             similarity: calc_similarity_keywords
+           }, status: :created) && return
   end
 
   # when change social value, extract top 5 keywords and calculate simularity
   def social
-
-    social = params[:social].nil? ? "" : params[:social].downcase
+    social = params[:social].nil? ? '' : params[:social].downcase
     social = social.squish
 
     social_segment = Hash.new(0)
@@ -63,7 +60,7 @@ class DataController < ApplicationController
     end
 
     # Sort social hash by word count
-    social_segment = Hash[social_segment.sort_by{|k, v| v}.reverse]
+    social_segment = Hash[social_segment.sort_by { |_k, v| v }.reverse]
 
     social_keywords_array = []
     json_result = {}
@@ -79,18 +76,17 @@ class DataController < ApplicationController
     similarity_obj.social = social
     similarity_obj.social_keywords = social_keywords_array.map(&:inspect).join(' ')
 
-    render :json => {
-      :success => true, 
-      :result => json_result.to_json,
-      :social_keywords => social_keywords_array.to_json,
-      :similarity => calc_similarity_keywords
-    }, status: :created and return
+    render(json: {
+             success: true,
+             result: json_result.to_json,
+             social_keywords: social_keywords_array.to_json,
+             similarity: calc_similarity_keywords
+           }, status: :created) && return
   end
 
   # Calculate similarity between news and social keywords
   # If news/social keywords are empty, return 0
   def calc_similarity_keywords
-
     if SimilarityCalculator.news_keywords.blank? || SimilarityCalculator.social_keywords.blank?
       return 0
     end
@@ -99,13 +95,10 @@ class DataController < ApplicationController
     news_keywords_array = SimilarityCalculator.news_keywords.split(/ /).map(&:downcase)
     social_keywords_array = SimilarityCalculator.social_keywords.split(/ /).map(&:downcase)
     news_keywords_array.each do |n_k|
-      if social_keywords_array.include? n_k
-        same_count += 1
-      end
+      same_count += 1 if social_keywords_array.include? n_k
     end
 
     # Return the value in percentage
-    "%1.f" % ((same_count.to_f / news_keywords_array.length.to_f) * 100)
+    '%1.f' % ((same_count.to_f / news_keywords_array.length.to_f) * 100)
   end
-
 end

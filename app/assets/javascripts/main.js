@@ -194,10 +194,10 @@ $(document).ready(function() {
   }
 
   // Person1 keywords
-  $('#person_keywords1, #person_keywords2, #person_keywords3').on('blur', function() {
-    calculate_social_person();
-    calculate_venue_val();
-  });
+  // $('#person_keywords1, #person_keywords2, #person_keywords3').on('blur', function() {
+  //   calculate_social_person();
+  //   calculate_venue_val();
+  // });
 
   $('#person_location_x1, #person_location_y1, #venue_x1, #venue_y1,' +
     '#person_location_x2, #person_location_y2, #venue_x2, #venue_y2,' + 

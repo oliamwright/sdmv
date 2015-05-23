@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-	post '/contact', :to => "contact#submit"
-	post '/contact_cms', :to => "contact#submit_cms"
-
   root :to => "home#index"
   get'talent/index', :to => "talent#index"
   get'search', :to => "home#search"

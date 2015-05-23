@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'haml'
-gem 'erb2haml', :group => :development
+gem 'erb2haml', group: :development
 
 # Use debugger
 gem 'debugger', group: [:development, :test]
@@ -40,7 +40,10 @@ gem 'unicorn', '4.5.0'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'thin'
-gem 'pry', :group => :development
+
+gem 'pry-rails', group: :development
 
 gem 'rspec-rails', group: [:development, :test]
 gem 'simplecov', group: [:test], require: false
+
+gem 'rubocop', group: :development, require: false

@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150521034355) do
 
   create_table "person_values", force: true do |t|
@@ -40,5 +41,8 @@ ActiveRecord::Schema.define(version: 20150521034355) do
     t.float    "sum_dist",   limit: 24
     t.float    "sum_value",  limit: 24
   end
+=======
+ActiveRecord::Schema.define(version: 0) do
+>>>>>>> 8495ce7084feb4815783ec6163fb634443e1e68d
 
 end

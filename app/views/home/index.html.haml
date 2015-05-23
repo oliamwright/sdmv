@@ -82,31 +82,31 @@
       .note Calculate the top 5 keywords from the textarea above, and compare the similarity between News Keywords and Social Keywords
   .grid_3
     %h2 Person
-    .box
-      %h3 Person #1
-      %h4 Location (X,Y)
-      %input#person_location_x1.loc.numeric{:value => "1"}
-      %input#person_location_y1.loc.numeric{:value => "1"}
-      %br
-      .note Allow for any number: for example 100.5 or -100.5 to be entered into the X,Y Location Fields
-      %h4 Influence (higher is better)
-      %input#influence1.requirement.numeric{:value => "500"}
-      .note Allow for any number: for example 100.5 or -100.5 to be entered into the Influence Field
-      %h4 Availability Range
-      %input#person1_availability_min.time{:value => "4:00"}
-      %input#person1_availability_max.time{:value => "6:00"}
-      %br
-      .note Allow for any number: for example 100.5 or -100.5 to be entered into the Availability Field
-      %hr
-      %h4 Keywords
-      %input#person_keywords1.requirement{:value => "nepal, earthquake"}
-      %p.sum
-        INT LVL = 
-        %span#person_int_lvl1 0
-        %span %
-      .note Compare the similarity between Social and Person Keywords
-      .notice Push Notification Received
-      .add + Join
+    / .box
+    /   %h3 Person #1
+    /   %h4 Location (X,Y)
+    /   %input#person_location_x1.loc.numeric{:value => "1"}
+    /   %input#person_location_y1.loc.numeric{:value => "1"}
+    /   %br
+    /   .note Allow for any number: for example 100.5 or -100.5 to be entered into the X,Y Location Fields
+    /   %h4 Influence (higher is better)
+    /   %input#influence1.requirement.numeric{:value => "500"}
+    /   .note Allow for any number: for example 100.5 or -100.5 to be entered into the Influence Field
+    /   %h4 Availability Range
+    /   %input#person1_availability_min.time{:value => "4:00"}
+    /   %input#person1_availability_max.time{:value => "6:00"}
+    /   %br
+    /   .note Allow for any number: for example 100.5 or -100.5 to be entered into the Availability Field
+    /   %hr
+    /   %h4 Keywords
+    /   %input#person_keywords1.requirement{:value => "nepal, earthquake"}
+    /   %p.sum
+    /     INT LVL = 
+    /     %span#person_int_lvl1 0
+    /     %span %
+    /   .note Compare the similarity between Social and Person Keywords
+    /   .notice Push Notification Received
+    /   .add + Join
 
     = render :partial => 'person_values/list', locals: { person: @peoples }
 
@@ -126,57 +126,57 @@
         = f.submit 'Add'
   .grid_3
     %h2 Venue
-    .box
-      %h3 Venue #1
-      %h4 Location (X,Y)
-      %input#venue_x1.loc.numeric{:value => "1.5"}
-      %input#venue_y1.loc.numeric{:value => "1.5"}
-      %br
-      .note Allow for any number for example 100.5 or -100.5 to be entered into the X,Y fields
-      %table.full.list
-        %tr
-          %th Person
-          %th DIST
-          %th INT
-          %th INF
-          %th VAL
-        %tr
-          %td Person #1
-          %td#venue1_dist1 2.8
-          %td#venue1_int1 .5
-          %td#venue1_influence1 100
-          %td#venue1_val1 10.0
-        %tr
-          %td Person #2
-          %td#venue1_dist2 1.0
-          %td#venue1_int2 .2
-          %td#venue1_influence2 200
-          %td#venue1_val2 4.4
-        %tr
-          %td Person #3
-          %td#venue1_dist3 8.5
-          %td#venue1_int3 .1
-          %td#venue1_influence3 500
-          %td#venue1_val3 38.5
-        %tr.sum
-          %td 
-          %td#venue_dist_sum1 12.3
-          %td 
-          %td 
-          %td#venue_val_sum1 52.9
-      .note 
-        %b DIST 
-        = "Calculate Distance Between Person & Venue =SQRT((VenueX-PersonX)^2+(VenueY-PersonY)^2)"
-        %br
-        %b INT
-        Show the interest value of each person
-        %br
-        %b INF
-        Show the influence value of each person
-        %br
-        %b VAL
-        = "Calculate Value by (INT * INF)/DIST"
-        And Showcase the Sum of DIST and VAL
+    / .box
+    /   %h3 Venue #1
+    /   %h4 Location (X,Y)
+    /   %input#venue_x1.loc.numeric{:value => "1.5"}
+    /   %input#venue_y1.loc.numeric{:value => "1.5"}
+    /   %br
+    /   .note Allow for any number for example 100.5 or -100.5 to be entered into the X,Y fields
+    /   %table.full.list
+    /     %tr
+    /       %th Person
+    /       %th DIST
+    /       %th INT
+    /       %th INF
+    /       %th VAL
+    /     %tr
+    /       %td Person #1
+    /       %td#venue1_dist1 2.8
+    /       %td#venue1_int1 .5
+    /       %td#venue1_influence1 100
+    /       %td#venue1_val1 10.0
+    /     %tr
+    /       %td Person #2
+    /       %td#venue1_dist2 1.0
+    /       %td#venue1_int2 .2
+    /       %td#venue1_influence2 200
+    /       %td#venue1_val2 4.4
+    /     %tr
+    /       %td Person #3
+    /       %td#venue1_dist3 8.5
+    /       %td#venue1_int3 .1
+    /       %td#venue1_influence3 500
+    /       %td#venue1_val3 38.5
+    /     %tr.sum
+    /       %td 
+    /       %td#venue_dist_sum1 12.3
+    /       %td 
+    /       %td 
+    /       %td#venue_val_sum1 52.9
+    /   .note 
+    /     %b DIST 
+    /     = "Calculate Distance Between Person & Venue =SQRT((VenueX-PersonX)^2+(VenueY-PersonY)^2)"
+    /     %br
+    /     %b INT
+    /     Show the interest value of each person
+    /     %br
+    /     %b INF
+    /     Show the influence value of each person
+    /     %br
+    /     %b VAL
+    /     = "Calculate Value by (INT * INF)/DIST"
+    /     And Showcase the Sum of DIST and VAL
     = render :partial => 'venues/list', locals: { venues: @venues }
 
     .box
