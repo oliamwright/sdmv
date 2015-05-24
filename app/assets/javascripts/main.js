@@ -9,6 +9,9 @@ $(document).ready(function() {
   news_keywords = [];
   social_keywords = [];
 
+  // Keeps joined person Id list
+  joined_person_list = [];
+
   function update_news() {
     $.ajax({
       url: '/news',
@@ -61,7 +64,7 @@ $(document).ready(function() {
         $('#social_result').html(social_result_append);
         $('#social_news_comp').text('Social / News Keyword Comp = ' + e.similarity + '%');
 
-        calculate_social_person();
+        // calculate_social_person();
       },
       error: function(e) {
       }
@@ -86,40 +89,40 @@ $(document).ready(function() {
     }
   });
 
-  function calculate_social_person () {
-    sum_int = 0;
-    for (var j = 1 ; j <= 3; j++ ) {
-      keywords = $('#person_keywords' + j).val().split(',');
+  // function calculate_social_person () {
+  //   sum_int = 0;
+  //   for (var j = 1 ; j <= 3; j++ ) {
+  //     keywords = $('#person_keywords' + j).val().split(',');
 
-      for (var i = 0; i < keywords.length; i++) {
-        keywords[i] = keywords[i].trim();
-      }
+  //     for (var i = 0; i < keywords.length; i++) {
+  //       keywords[i] = keywords[i].trim();
+  //     }
 
-      same_count = 0;
-      for (var i = 0; i < keywords.length; i++) {
-        if ($.inArray(keywords[i], social_keywords) > -1) {
-          same_count += 1;
-        }
-      }
+  //     same_count = 0;
+  //     for (var i = 0; i < keywords.length; i++) {
+  //       if ($.inArray(keywords[i], social_keywords) > -1) {
+  //         same_count += 1;
+  //       }
+  //     }
 
-      similarity_percent = 0;
-      if (same_count == 0 || social_keywords.length == 0) {
-        similarity_percent = 0;
-      }
-      else {
-        similarity_percent = (same_count / social_keywords.length) * 100;
-      }
+  //     similarity_percent = 0;
+  //     if (same_count == 0 || social_keywords.length == 0) {
+  //       similarity_percent = 0;
+  //     }
+  //     else {
+  //       similarity_percent = (same_count / social_keywords.length) * 100;
+  //     }
 
-      sum_int += similarity_percent;
-      $('#person_int_lvl' + j).text(similarity_percent.toFixed(1));
+  //     sum_int += similarity_percent;
+  //     $('#person_int_lvl' + j).text(similarity_percent.toFixed(1));
 
-      for (var i = 1; i <= 3; i++) {
-        $('#venue' + i + '_int' + j).html((similarity_percent / 100).toFixed(1));
-      }
-    }
+  //     for (var i = 1; i <= 3; i++) {
+  //       $('#venue' + i + '_int' + j).html((similarity_percent / 100).toFixed(1));
+  //     }
+  //   }
 
-    $('#avg_int').html((sum_int / 3).toFixed(1));
-  }
+  //   $('#avg_int').html((sum_int / 3).toFixed(1));
+  // }
 
   // Calculate and show value of Venue{#} by each Person{#} data
   // Sum up the VAL
@@ -201,7 +204,7 @@ $(document).ready(function() {
         inf_sum += parseFloat($('#influence' + j).val());
       }
     }
-    debugger;
+
     $('#avg_influence').html((inf_sum / 3).toFixed(1));
     calculate_venue_val();
   })
@@ -234,33 +237,32 @@ $(document).ready(function() {
 
   $('#possibly_attending_base, #probably_attending_base').on('blur', function() {
     if (isNaN($(this).val())) {
+      alert('Please input numeric value.');
       $(this).focus();
     } else {
-      possibly_attending = 0;
-      probably_attending = 0;
-      for (var i = 1; i <= 3; i++) {
-        if (parseFloat($('#person_int_lvl' + i).html() / 100) >= $('#possibly_attending_base').val()) {
-          possibly_attending ++;
-        }
-
-        if (parseFloat($('#person_int_lvl' + i).html() / 100) >= $('#probably_attending_base').val()) {
-          probably_attending ++;
-        }
-      }
-
-      $('#possibly_attending').html(possibly_attending);
-      $('#probably_attending').html(probably_attending);
-
-      display_push_button($('#push_available').val());
+      update_attending();   
     }
   })
 
-  function display_push_button(val) {
-    if (parseFloat($('#probably_attending').html()) >= val) {
-      $('#push_notice').css('display', '');
-    } else {
-      $('#push_notice').css('display', 'none'); 
+  window.update_attending = function() {
+    possibly_attending = 0;
+    probably_attending = 0;
+
+    person_count = parseFloat($('#person_count').val());
+    for (var i = 0; i < person_count; i++) {
+      if (parseFloat($('#person_int_lvl' + i).html() / 100) >= $('#possibly_attending_base').val()) {
+        possibly_attending ++;
+      }
+
+      if (parseFloat($('#person_int_lvl' + i).html() / 100) >= $('#probably_attending_base').val()) {
+        probably_attending ++;
+      }
     }
+
+    $('#possibly_attending').html(possibly_attending);
+    $('#probably_attending').html(probably_attending);
+
+    display_push_button($('#push_available').val());
   }
 
   $('#push_available').on('blur', function() {
@@ -271,8 +273,28 @@ $(document).ready(function() {
     }
   })
 
+
+  function display_push_button(val) {
+    if (parseFloat($('#probably_attending').html()) >= val) {
+      $('#push_notice').css('display', '');
+    } else {
+      $('#push_notice').css('display', 'none'); 
+    }
+  }
+
+  $('#push_notice').on('click', function() {
+    person_count = parseFloat($('#person_count').val());
+    for (var i = 0; i < person_count; i++) {
+      $('#push_notice_received' + i).show();
+      $('#join'+i).show();
+    }
+  })
+
+
+
+  // Update Highchart series data for Venue objects
+  // This is called as Ajax callback
   window.update_venue_data = function(venue_data) {
-    debugger;
     chart = $('#container').highcharts();
 
     venue_series_data = [];
@@ -284,8 +306,9 @@ $(document).ready(function() {
     chart.series[1].setData(venue_series_data);
   }
 
+  // Update Highchart series data for Person objects
+  // This is called as Ajax callback
   window.update_person_data = function(person_data) {
-    debugger;
     chart = $('#container').highcharts();
 
     person_series_data = [];
@@ -297,3 +320,12 @@ $(document).ready(function() {
     chart.series[0].setData(person_series_data);
   }
 });
+
+var join_notification = function(obj) {
+  joined_id = $(obj).attr('data-id');
+  if (joined_person_list.indexOf(joined_id) < 0) {
+    joined_person_list.push(joined_id);
+  }
+
+  $('#joined_count').html(joined_person_list.length);
+};

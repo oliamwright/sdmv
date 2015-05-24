@@ -1,5 +1,5 @@
 #person_section
-  - @person_values.each do |person|
+  - @person_values.each_with_index do |person, index|
     .box
       %h3= "Person #" + person.id.to_s
       = form_for person, method: :patch, remote: true do |f|
@@ -17,7 +17,9 @@
       = button_to 'Delete', person, method: :delete, remote: true, data: { confirm: 'Are you sure?' }
       %p.sum
         INT LVL = 
-        %span#person_int_lvl2= (person.int_lvl.to_f * 100)
+        %span{:id => "person_int_lvl#{index}"}= (person.int_lvl.to_f * 100)
         %span %
-      .notice Push Notification Received
-      .add + Join
+      .notice{:id => "push_notice_received#{index}", style: "display:none;"} Push Notification Received
+      .add{:id => "join#{index}", :style => "display:none;", :onclick => "join_notification(this);", :data => {:id => person.id}} + Join
+
+  = hidden_field_tag "person_count", @person_values.length, { :id => "person_count" }
