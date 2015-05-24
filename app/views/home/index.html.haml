@@ -112,7 +112,7 @@
 
     .box
       %h3 New Person
-      = form_for @person_value, remote: true, format: :js do |f|
+      = form_for @person_value, remote: true, format: :js, html: { id: "new_person_form"} do |f|
         %h4 Location (X,Y)
         = f.text_field :x, class: "loc numeric"
         = f.text_field :y, class: "loc numeric"

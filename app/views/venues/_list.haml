@@ -1,5 +1,5 @@
 #venue_section
-  - venues.each do |venue|
+  - @venues.each do |venue|
     .box
       %h3= "Venue #" + venue.id.to_s
       %h4 Location (X,Y)
@@ -28,4 +28,3 @@
           %td 
           %td 
           %td= venue.sum_value
-        

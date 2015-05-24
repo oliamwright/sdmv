@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-  update_charts();
-
   // Initialize countdown timer
   countdown = 60 * 10,
   display = $('#starts_in');
@@ -178,36 +176,20 @@ $(document).ready(function() {
     }
   }
 
-  // Update Highcharts when Person Location and Venue Location are updated
-  function update_charts() {
-    chart = $('#container').highcharts();
-
-    person_data = [];
-    venue_data = [];
-
-    for (var i = 1; i <= 3; i++) {
-      person_data.push([parseFloat($('#person_location_x' + i).val()), parseFloat($('#person_location_y' + i).val())]);
-      venue_data.push([parseFloat($('#venue_x' + i).val()), parseFloat($('#venue_y' + i).val())]);
-    }
-    chart.series[0].setData(person_data);
-    chart.series[1].setData(venue_data);
-  }
-
   // Person1 keywords
   // $('#person_keywords1, #person_keywords2, #person_keywords3').on('blur', function() {
   //   calculate_social_person();
   //   calculate_venue_val();
   // });
 
-  $('#person_location_x1, #person_location_y1, #venue_x1, #venue_y1,' +
-    '#person_location_x2, #person_location_y2, #venue_x2, #venue_y2,' + 
-    '#person_location_x3, #person_location_y3, #venue_x3, #venue_y3')
-  .on('blur', function() {
+  // $('#person_location_x1, #person_location_y1, #venue_x1, #venue_y1,' +
+  //   '#person_location_x2, #person_location_y2, #venue_x2, #venue_y2,' + 
+  //   '#person_location_x3, #person_location_y3, #venue_x3, #venue_y3')
+  // .on('blur', function() {
 
-    calculate_venue_dist();
-    calculate_venue_val();
-    update_charts();
-  })
+  //   calculate_venue_dist();
+  //   calculate_venue_val();
+  // })
 
   $('#influence1, #influence2, #influence3').on('blur', function() {
     
@@ -288,4 +270,30 @@ $(document).ready(function() {
       display_push_button($(this).val());
     }
   })
+
+  window.update_venue_data = function(venue_data) {
+    debugger;
+    chart = $('#container').highcharts();
+
+    venue_series_data = [];
+    venue_data_list = JSON.parse(venue_data);
+    for (var i = 0; i < venue_data_list.length; i++) {
+      venue_series_data.push([venue_data_list[i].x, venue_data_list[i].y]);
+    }
+
+    chart.series[1].setData(venue_series_data);
+  }
+
+  window.update_person_data = function(person_data) {
+    debugger;
+    chart = $('#container').highcharts();
+
+    person_series_data = [];
+    person_data_list = JSON.parse(person_data);
+    for (var i = 0; i < person_data_list.length; i++) {
+      person_series_data.push([person_data_list[i].x, person_data_list[i].y]);
+    }
+
+    chart.series[0].setData(person_series_data);
+  }
 });

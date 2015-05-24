@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include ActionView::Helpers::NumberHelper
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -38,7 +39,7 @@ class ApplicationController < ActionController::Base
 
       same_count = 0
       similarity_percent = 0
-      unless SimilarityCalculator.social_keywords.empty?
+      unless SimilarityCalculator.social_keywords.nil?
         keyword.split(',').each(&:strip!).each do |key|
           if SimilarityCalculator.social_keywords.include? key
             same_count += 1
