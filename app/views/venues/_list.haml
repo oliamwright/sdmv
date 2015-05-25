@@ -1,7 +1,7 @@
 #venue_section
-  - @venues.each do |venue|
+  - @venues.each_with_index do |venue, index|
     .box
-      %h3= "Venue #" + venue.id.to_s
+      %h3= "Venue #" + index.to_s
       %h4 Location (X,Y)
       = form_for venue, method: :patch, remote: true do |f|
         = f.text_field :x, :value => venue.x, class: "loc numeric"

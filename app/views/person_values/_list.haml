@@ -1,7 +1,7 @@
 #person_section
   - @person_values.each_with_index do |person, index|
     .box
-      %h3= "Person #" + person.id.to_s
+      %h3= "Person #" + index.to_s
       = form_for person, method: :patch, remote: true do |f|
         %h4 Location (X,Y)
         = f.text_field :x, :value => person.x, class: "loc numeric"

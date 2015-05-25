@@ -290,8 +290,6 @@ $(document).ready(function() {
     }
   })
 
-
-
   // Update Highchart series data for Venue objects
   // This is called as Ajax callback
   window.update_venue_data = function(venue_data) {
