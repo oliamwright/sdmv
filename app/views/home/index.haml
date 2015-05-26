@@ -50,6 +50,73 @@
 	.grid_12
 		.note Take Top Keyword 1 + Top Keyword 2 from News & Social, and find the average value between Availability, and choose Venue with highest weight, and show average of influence and interest levels.
 		%hr
+	.grid_12
+		%ul.tabs
+			%li.active News
+			%li Social
+			%li Person
+			%li Item
+			%li Location
+	.grid_12
+		%hr
+	.grid_4
+		%h2 RSS
+		%table.full.list
+			%tr
+				%th URL
+				%th Items
+				%th
+				%th
+			%tr
+				%td 
+					%a{:href => "#"} www.newsfeedurl.com/feeds.xml
+				%td 20
+				%td edit
+				%td	delete
+			%tr
+				%td 
+					%a{:href => "#"} www.newsfeedurl.com/feedsV2.xml
+				%td 10
+				%td edit
+				%td	delete
+		%b RSS URL
+		%input.requirement
+		.btn Save
+	.grid_4
+		%h2 News Post
+		%table.full.list
+			%tr
+				%th Headline
+				%th Posted
+				%th URL
+				%th
+			%tr
+				%td 
+					%a{:href => "#"} 20,000 Injured in Landslide
+				%td 4/26/15
+				%td www.cnn.com/article.html
+			%tr
+				%td 
+					%a{:href => "#"} 16 Dead in Flood
+				%td 4/26/15
+				%td www.cnn.com/article.html
+	.grid_4
+		%h2 Post Detail
+		%b Headline
+		%input.requirement{:value => "20,000 Injured in Landslide"}
+		%b Body
+		%textarea#news.news{} Nepal earthquake Death toll passes 4,800 as rescuers in nepal face challenges. More than 4,800 people dead. More than 9,200 injured. Eight million affected across Nepal. One million children urgently in need of help. Those are the startling numbers that indicate the scale of the devastation from the huge earthquake that struck the Himalayan nation on Saturday.
+		%b URL
+		%input.requirement{:value => "www.cnn.com/article.html"}
+		%h4 Top 5 Keywords by Density
+		%ul#news_result
+			%li Nepal (6)
+			%li Earthquake (4)
+			%li Help (3)
+			%li Dead (2)
+			%li Affected (2)
+	.grid_12
+		%hr
 	.grid_3
 		%h2 News
 		.box
