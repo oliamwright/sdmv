@@ -11,6 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20150521034355) do
+
+  create_table "person_values", force: true do |t|
+    t.float    "x",                 limit: 24
+    t.float    "y",                 limit: 24
+    t.float    "influence",         limit: 24
+    t.time     "availability_from"
+    t.time     "availability_to"
+    t.string   "keywords"
+    t.float    "int_lvl",           limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "venue_person_values", force: true do |t|
+    t.integer "venue_id"
+    t.integer "person_value_id"
+    t.float   "dist",            limit: 24
+    t.float   "value",           limit: 24
+  end
+
+  create_table "venues", force: true do |t|
+    t.float    "x",          limit: 24
+    t.float    "y",          limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "sum_dist",   limit: 24
+    t.float    "sum_value",  limit: 24
+  end
+=======
 ActiveRecord::Schema.define(version: 0) do
+>>>>>>> 8495ce7084feb4815783ec6163fb634443e1e68d
 
 end

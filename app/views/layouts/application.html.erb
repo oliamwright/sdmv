@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>SDMV</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,100|Roboto+Slab:400,700,100' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lora:400italic' rel='stylesheet' type='text/css'>
@@ -13,6 +13,7 @@
   <link rel="shortcut icon" href="http://www.trueinteraction.com/favicon.ico" />
   <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="http://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
   
  <!-- 
   <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -20,6 +21,7 @@
   <link rel="stylesheet" media="screen" href="http://handsontable.com/dist/handsontable.full.css">
   <link rel="stylesheet" media="screen" href="http://handsontable.com/demo/css/samples.css">
 -->
+
 </head>
 <body>
 
@@ -27,14 +29,12 @@
 
 </body>
 <script type="text/javascript">
-<!--
-    function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       if(e.style.display == 'block')
-          e.style.display = 'none';
-       else
-          e.style.display = 'block';
-    }
-//-->
+  function toggle_visibility(id) {
+     var e = document.getElementById(id);
+     if(e.style.display == 'block')
+        e.style.display = 'none';
+     else
+        e.style.display = 'block';
+  }
 </script>
 </html>

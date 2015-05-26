@@ -1,0 +1,30 @@
+#venue_section
+  - @venues.each_with_index do |venue, index|
+    .box
+      %h3= "Venue #" + index.to_s
+      %h4 Location (X,Y)
+      = form_for venue, method: :patch, remote: true do |f|
+        = f.text_field :x, :value => venue.x, class: "loc numeric"
+        = f.text_field :y, :value => venue.y, class: "loc numeric"
+        = f.submit 'Update'
+      = button_to 'Delete', venue, method: :delete, remote: true, data: { confirm: 'Are you sure?' }
+      %table.full.list
+        %tr
+          %th Person
+          %th DIST
+          %th INT
+          %th INF
+          %th VAL
+        - venue.venue_person_values.each_with_index do |vpv, idx|
+          %tr
+            %td= "Person #" + idx.to_s
+            %td= vpv.dist
+            %td= vpv.person_value.int_lvl
+            %td= vpv.person_value.influence
+            %td= vpv.value
+        %tr.sum
+          %td
+          %td= venue.sum_dist
+          %td 
+          %td 
+          %td= venue.sum_value
