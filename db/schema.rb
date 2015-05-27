@@ -41,19 +41,12 @@ ActiveRecord::Schema.define(version: 20150527192323) do
   end
 
   create_table "venues", force: true do |t|
-    t.float    "x",               limit: 24
-    t.float    "y",               limit: 24
+    t.float    "x",          limit: 24
+    t.float    "y",          limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "sum_dist",        limit: 24
-    t.float    "sum_value",       limit: 24
-    t.string   "address"
-    t.string   "category"
-    t.time     "open_times_from"
-    t.time     "open_times_to"
-    t.integer  "attendee_count"
-    t.string   "contact"
-    t.boolean  "booked"
+    t.float    "sum_dist",   limit: 24
+    t.float    "sum_value",  limit: 24
   end
 
 end
