@@ -6,9 +6,9 @@ $(function () {
 
   mapCanvas = $('#map')[0];
   mapOptions = {
-    center: new google.maps.LatLng(44.5403, -78.5463),
-    zoom: 2,
-    mapTypeId: google.maps.MapTypeId.HYBRID
+    center: new google.maps.LatLng(40.7468, -73.9468),
+    zoom: 16,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   map = new google.maps.Map(mapCanvas, mapOptions);
 

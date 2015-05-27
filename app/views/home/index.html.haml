@@ -2,7 +2,7 @@
   .grid_12
     %h1 SDMV
     %hr
-  .grid_6
+  .grid_2
     INT LVL needs to be greater than:
     %br
     %input#possibly_attending_base{:value => ".1"} 
@@ -11,7 +11,7 @@
     %hr
     INT LVL needs to be greater than:
     %br
-    %input#probably_attending_base{:value => ".49"} 
+    %input#probably_attending_base{:value => ".5"} 
     %br
     to = Probably Attending
     %hr
@@ -43,10 +43,10 @@
       .joined.inline
         %b joined:
         %span#joined_count 0
-  .grid_6
+  .grid_4
 
-    #container{:style => "height: 320px; margin: 0 auto;"}
-  .grid_12.map_canvas#map
+    #container{:style => "height: 300px; margin: 0 auto;"}
+  .grid_6.map_canvas#map
   .grid_12
     .note Take Top Keyword 1 + Top Keyword 2 from News & Social, and find the average value between Availability, and choose Venue with highest weight, and show average of influence and interest levels.
     %hr
