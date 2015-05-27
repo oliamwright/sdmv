@@ -126,58 +126,58 @@ $(document).ready(function() {
 
   // Calculate and show value of Venue{#} by each Person{#} data
   // Sum up the VAL
-  function calculate_venue_val() {
-    val_max_idx = 0;
-    val_max = -99999;
-    for (var i = 1; i <= 3; i++) {
-      val_sum = 0;
-      for (var j = 1; j <=3; j++) {
-        dist = isNaN($('#venue' + i + '_dist' + j).html()) ? 0 : $('#venue' + i + '_dist' + j).html();
-        int_lvl = isNaN($('#venue' + i + '_int' + j).html()) ? 0 : $('#venue' + i + '_int' + j).html();
-        inf = isNaN($('#venue' + i + '_influence' + j).html()) ? 0 : $('#venue' + i + '_influence' + j).html();
+  // function calculate_venue_val() {
+  //   val_max_idx = 0;
+  //   val_max = -99999;
+  //   for (var i = 1; i <= 3; i++) {
+  //     val_sum = 0;
+  //     for (var j = 1; j <=3; j++) {
+  //       dist = isNaN($('#venue' + i + '_dist' + j).html()) ? 0 : $('#venue' + i + '_dist' + j).html();
+  //       int_lvl = isNaN($('#venue' + i + '_int' + j).html()) ? 0 : $('#venue' + i + '_int' + j).html();
+  //       inf = isNaN($('#venue' + i + '_influence' + j).html()) ? 0 : $('#venue' + i + '_influence' + j).html();
 
-        val = 0
-        if (dist == 0) {
-          val = 0;
-        } else {
-          val = (int_lvl * inf) / dist;
-        }
+  //       val = 0
+  //       if (dist == 0) {
+  //         val = 0;
+  //       } else {
+  //         val = (int_lvl * inf) / dist;
+  //       }
 
-        val = parseFloat(val.toFixed(1));
-        val_sum += val;
-        $('#venue' + i + '_val' + j).html(val);
+  //       val = parseFloat(val.toFixed(1));
+  //       val_sum += val;
+  //       $('#venue' + i + '_val' + j).html(val);
 
-        // Get maximum Venue and its index
-        if (val > val_max) {
-          val_max = val;
-          val_max_idx = i;
-        }
-      }
+  //       // Get maximum Venue and its index
+  //       if (val > val_max) {
+  //         val_max = val;
+  //         val_max_idx = i;
+  //       }
+  //     }
 
-      $('#venue_val_sum' + i).html(val_sum.toFixed(1));
-      $('#max_venue').html(val_max_idx);
-    }
-  }
+  //     $('#venue_val_sum' + i).html(val_sum.toFixed(1));
+  //     $('#max_venue').html(val_max_idx);
+  //   }
+  // }
 
   // Calculate and show dist of Venue{#} by each Person{#} data
   // Sum up the DIST
-  function calculate_venue_dist() {
-    for (var i = 1; i <= 3; i++) {
-      dist_sum = 0;
-      for (var j = 1; j <= 3; j++) {
-        v_x = isNaN($('#venue_x' + i).val()) ? 0 : $('#venue_x' + i).val();
-        v_y = isNaN($('#venue_y' + i).val()) ? 0 : $('#venue_y' + i).val();
-        p_x = isNaN($('#person_location_x' + j).val()) ? 0 : $('#person_location_x' + j).val();
-        p_y = isNaN($('#person_location_y' + j).val()) ? 0 : $('#person_location_y' + j).val();
+  // function calculate_venue_dist() {
+  //   for (var i = 1; i <= 3; i++) {
+  //     dist_sum = 0;
+  //     for (var j = 1; j <= 3; j++) {
+  //       v_x = isNaN($('#venue_x' + i).val()) ? 0 : $('#venue_x' + i).val();
+  //       v_y = isNaN($('#venue_y' + i).val()) ? 0 : $('#venue_y' + i).val();
+  //       p_x = isNaN($('#person_location_x' + j).val()) ? 0 : $('#person_location_x' + j).val();
+  //       p_y = isNaN($('#person_location_y' + j).val()) ? 0 : $('#person_location_y' + j).val();
 
-        v = Math.sqrt(Math.pow((v_x - p_x), 2) + Math.pow((v_y - p_y), 2));
+  //       v = Math.sqrt(Math.pow((v_x - p_x), 2) + Math.pow((v_y - p_y), 2));
 
-        dist_sum += v;
-        $('#venue' + i + '_dist' + j).html(v.toFixed(1));
-      }
-      $('#venue_dist_sum' + i).html(dist_sum.toFixed(1));
-    }
-  }
+  //       dist_sum += v;
+  //       $('#venue' + i + '_dist' + j).html(v.toFixed(1));
+  //     }
+  //     $('#venue_dist_sum' + i).html(dist_sum.toFixed(1));
+  //   }
+  // }
 
   // Person1 keywords
   // $('#person_keywords1, #person_keywords2, #person_keywords3').on('blur', function() {
@@ -194,46 +194,46 @@ $(document).ready(function() {
   //   calculate_venue_val();
   // })
 
-  $('#influence1, #influence2, #influence3').on('blur', function() {
+  // $('#influence1, #influence2, #influence3').on('blur', function() {
     
-    for (var i = 1; i <= 3; i++) {
-      inf_sum = 0;
+  //   for (var i = 1; i <= 3; i++) {
+  //     inf_sum = 0;
 
-      for (var j = 1; j <= 3; j++) {
-        $('#venue' + i + '_influence' + j).html($('#influence' + j).val());
-        inf_sum += parseFloat($('#influence' + j).val());
-      }
-    }
+  //     for (var j = 1; j <= 3; j++) {
+  //       $('#venue' + i + '_influence' + j).html($('#influence' + j).val());
+  //       inf_sum += parseFloat($('#influence' + j).val());
+  //     }
+  //   }
 
-    $('#avg_influence').html((inf_sum / 3).toFixed(1));
-    calculate_venue_val();
-  })
+  //   $('#avg_influence').html((inf_sum / 3).toFixed(1));
+  //   calculate_venue_val();
+  // })
 
-  $('#person1_availability_min, #person1_availability_max,' + 
-    '#person2_availability_min, #person2_availability_max' + 
-    '#person3_availability_min, #person3_availability_max').on('blur', function() {
+  // $('#person1_availability_min, #person1_availability_max,' + 
+  //   '#person2_availability_min, #person2_availability_max' + 
+  //   '#person3_availability_min, #person3_availability_max').on('blur', function() {
 
-   if (!this.value.match(/^([01]?[0-9]|2[0-3]):[0-5][0-9]/)) {
-      alert('Please input the value in time format.');
-      $(this).focus();  
-    } else {
-      p1_min = isNaN($('#person1_availability_min').val()) ? 0 : parseFloat($('#person1_availability_min').val());
-      p1_max = isNaN($('#person1_availability_max').val()) ? 0 : parseFloat($('#person1_availability_max').val());
+  //  if (!this.value.match(/^([01]?[0-9]|2[0-3]):[0-5][0-9]/)) {
+  //     alert('Please input the value in time format.');
+  //     $(this).focus();  
+  //   } else {
+  //     p1_min = isNaN($('#person1_availability_min').val()) ? 0 : parseFloat($('#person1_availability_min').val());
+  //     p1_max = isNaN($('#person1_availability_max').val()) ? 0 : parseFloat($('#person1_availability_max').val());
 
-      avg1 = (p1_max + p1_min) / 2;
+  //     avg1 = (p1_max + p1_min) / 2;
 
-      p2_min = isNaN($('#person2_availability_min').val()) ? 0 : parseFloat($('#person2_availability_min').val());
-      p2_max = isNaN($('#person2_availability_max').val()) ? 0 : parseFloat($('#person2_availability_max').val());
-      avg2 = (p2_max + p2_min) / 2;      
+  //     p2_min = isNaN($('#person2_availability_min').val()) ? 0 : parseFloat($('#person2_availability_min').val());
+  //     p2_max = isNaN($('#person2_availability_max').val()) ? 0 : parseFloat($('#person2_availability_max').val());
+  //     avg2 = (p2_max + p2_min) / 2;      
 
-      p3_min = isNaN($('#person3_availability_min').val()) ? 0 : parseFloat($('#person3_availability_min').val());
-      p3_max = isNaN($('#person3_availability_max').val()) ? 0 : parseFloat($('#person3_availability_max').val());
-      avg3 = (p3_max + p3_min) / 2;
+  //     p3_min = isNaN($('#person3_availability_min').val()) ? 0 : parseFloat($('#person3_availability_min').val());
+  //     p3_max = isNaN($('#person3_availability_max').val()) ? 0 : parseFloat($('#person3_availability_max').val());
+  //     avg3 = (p3_max + p3_min) / 2;
 
-      avg = (avg1 + avg2 + avg3) / 3;
-      $('#avg_availability').html(avg.toFixed(1));
-    }
-  })
+  //     avg = (avg1 + avg2 + avg3) / 3;
+  //     $('#avg_availability').html(avg.toFixed(1));
+  //   }
+  // })
 
   $('#possibly_attending_base, #probably_attending_base').on('blur', function() {
     if (isNaN($(this).val())) {
@@ -290,40 +290,46 @@ $(document).ready(function() {
     }
   })
 
-  // Update Highchart series data for Venue objects
-  // This is called as Ajax callback
-  window.update_venue_data = function(venue_data) {
-    chart = $('#container').highcharts();
-
-    venue_series_data = [];
-    venue_data_list = JSON.parse(venue_data);
-    for (var i = 0; i < venue_data_list.length; i++) {
-      venue_series_data.push([venue_data_list[i].x, venue_data_list[i].y]);
+  var join_notification = function(obj) {
+    joined_id = $(obj).attr('data-id');
+    if (joined_person_list.indexOf(joined_id) < 0) {
+      joined_person_list.push(joined_id);
     }
 
-    chart.series[1].setData(venue_series_data);
+    $('#joined_count').html(joined_person_list.length);
+  };
+
+  // Convert address into latitude-longitude
+  // @Param: address - user-typed value
+  window.convert_address = function(address) {
+    geocoder.geocode({'address': address}, function(results, status) {
+      debugger;
+      if (status == google.maps.GeocoderStatus.OK) {
+        return results[0].geometry.location;
+      } else {
+        return null;
+      }
+    });
   }
 
-  // Update Highchart series data for Person objects
-  // This is called as Ajax callback
-  window.update_person_data = function(person_data) {
-    chart = $('#container').highcharts();
+  $('#add_venue').click(function() {
+    address = $('#venue_address').val();
 
-    person_series_data = [];
-    person_data_list = JSON.parse(person_data);
-    for (var i = 0; i < person_data_list.length; i++) {
-      person_series_data.push([person_data_list[i].x, person_data_list[i].y]);
+    if (address == "") {
+      alert('Address is mandatory field.');
+      return;
     }
 
-    chart.series[0].setData(person_series_data);
-  }
+    geocoder.geocode({'address': address}, function(results, status) {
+      debugger;
+      if (status == google.maps.GeocoderStatus.OK) {
+        latlong = results[0].geometry.location;
+        $('#x').val(latlong.F);
+        $('#y').val(latlong.A);
+        debugger;
+        $('#new_venue').submit();
+      }
+    });
+  })
 });
 
-var join_notification = function(obj) {
-  joined_id = $(obj).attr('data-id');
-  if (joined_person_list.indexOf(joined_id) < 0) {
-    joined_person_list.push(joined_id);
-  }
-
-  $('#joined_count').html(joined_person_list.length);
-};

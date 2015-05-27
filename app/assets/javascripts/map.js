@@ -1,8 +1,8 @@
 $(function () {
   iconBase = "https://maps.google.com/mapfiles/kml/pal4/";
 
-  venue_markers = [];
-  person_markers = [];
+  venue_markers = [];   // Venue Marker Objects
+  person_markers = [];  // Person Marker Objects
 
   mapCanvas = $('#map')[0];
   mapOptions = {
@@ -10,6 +10,7 @@ $(function () {
     zoom: 2,
     mapTypeId: google.maps.MapTypeId.HYBRID
   };
+
   map = new google.maps.Map(mapCanvas, mapOptions);
 
   // Update Google Map Makers for Venue objects

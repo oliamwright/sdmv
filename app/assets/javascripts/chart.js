@@ -72,4 +72,32 @@ $(function () {
             data: [[3, 1], [3, 3], [-1, -1]]
         }]
     });
+
+  // Update Highchart series data for Venue objects
+  // This is called as Ajax callback
+  window.update_venue_data = function(venue_data) {
+    chart = $('#container').highcharts();
+
+    venue_series_data = [];
+    venue_data_list = JSON.parse(venue_data);
+    for (var i = 0; i < venue_data_list.length; i++) {
+      venue_series_data.push([venue_data_list[i].x, venue_data_list[i].y]);
+    }
+
+    chart.series[1].setData(venue_series_data);
+  }
+
+  // Update Highchart series data for Person objects
+  // This is called as Ajax callback
+  window.update_person_data = function(person_data) {
+    chart = $('#container').highcharts();
+
+    person_series_data = [];
+    person_data_list = JSON.parse(person_data);
+    for (var i = 0; i < person_data_list.length; i++) {
+      person_series_data.push([person_data_list[i].x, person_data_list[i].y]);
+    }
+
+    chart.series[0].setData(person_series_data);
+  }
 });
