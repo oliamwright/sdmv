@@ -1,0 +1,12 @@
+#item_section
+  - @items.each_with_index do |item, index|
+    .box
+      %h3= "Item #" + index.to_s
+      = form_for item, method: :patch, remote: true do |f|
+        %h4 Location (X,Y)
+        = f.text_field :x, :value => item.x, class: "loc numeric"
+        = f.text_field :y, :value => item.y, class: "loc numeric"
+        %h4 Keywords
+        = f.text_field :keywords, :value => item.keywords, class: "requirement"
+        = f.submit 'Update'
+      = button_to 'Delete', item, method: :delete, remote: true, data: { confirm: 'Are you sure?' }

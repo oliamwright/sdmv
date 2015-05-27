@@ -44,5 +44,4 @@ class VenuesController < ApplicationController
 
   private
  
-
 end

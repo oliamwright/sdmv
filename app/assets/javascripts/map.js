@@ -3,6 +3,7 @@ $(function () {
 
   venue_markers = [];
   person_markers = [];
+  item_markers = [];
 
   mapCanvas = $('#map')[0];
   mapOptions = {
@@ -31,6 +32,28 @@ $(function () {
       });
 
       venue_markers.push(marker);
+    }
+  }
+
+  // Update Google Map Makers for Item objects
+  // This is called as Ajax callback
+  window.update_item_markers = function(item_data) {
+    for (var i = 0; i < item_markers.length; i++) {
+      item_markers[i].setMap(null);
+    }
+    item_markers = [];
+
+    item_data_list = JSON.parse(item_data);
+    for (var i = 0; i < item_data_list.length; i++) {
+      latlng = new google.maps.LatLng(item_data_list[i].x, item_data_list[i].y);
+      marker = new google.maps.Marker({
+        position: latlng,
+        icon: iconBase + "icon29.png",
+        map: map,
+        title: "Item " + (i+1) + " (" + item_data_list[i].x + ", " + item_data_list[i].y + ")"
+      });
+
+      item_markers.push(marker);
     }
   }
 
