@@ -7,7 +7,7 @@ $(function () {
   mapCanvas = $('#map')[0];
   mapOptions = {
     center: new google.maps.LatLng(40.7468, -73.9468),
-    zoom: 16,
+    zoom: 14,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   map = new google.maps.Map(mapCanvas, mapOptions);
