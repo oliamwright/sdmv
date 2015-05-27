@@ -9,8 +9,8 @@
         %h4 Influence (higher is better)
         = f.text_field :influence, :value => person.influence, class: "loc numeric"
         %h4 Availability Range
-        = f.text_field :availability_from, :value => person.availability_from.strftime("%H:%M"), class: "time"
-        = f.text_field :availability_to, :value => person.availability_to.strftime("%H:%M"), class: "time"
+        = f.text_field :availability_from, :value => person.availability_from.nil? ? "" : person.availability_from.strftime("%H:%M"), class: "time"
+        = f.text_field :availability_to, :value => person.availability_to.nil? ? "" : person.availability_to.strftime("%H:%M"), class: "time"
         %h4 Keywords
         = f.text_field :keywords, :value => person.keywords, class: "requirement"
         = f.submit 'Update'
