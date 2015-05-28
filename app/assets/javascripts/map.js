@@ -1,14 +1,20 @@
 $(function () {
   iconBase = "https://maps.google.com/mapfiles/kml/pal4/";
 
+<<<<<<< HEAD
   venue_markers = [];   // Venue Marker Objects
   person_markers = [];  // Person Marker Objects
+=======
+  venue_markers = [];
+  person_markers = [];
+  item_markers = [];
+>>>>>>> master
 
   mapCanvas = $('#map')[0];
   mapOptions = {
-    center: new google.maps.LatLng(44.5403, -78.5463),
-    zoom: 2,
-    mapTypeId: google.maps.MapTypeId.HYBRID
+    center: new google.maps.LatLng(40.7468, -73.9468),
+    zoom: 14,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
   map = new google.maps.Map(mapCanvas, mapOptions);
@@ -32,6 +38,28 @@ $(function () {
       });
 
       venue_markers.push(marker);
+    }
+  }
+
+  // Update Google Map Makers for Item objects
+  // This is called as Ajax callback
+  window.update_item_markers = function(item_data) {
+    for (var i = 0; i < item_markers.length; i++) {
+      item_markers[i].setMap(null);
+    }
+    item_markers = [];
+
+    item_data_list = JSON.parse(item_data);
+    for (var i = 0; i < item_data_list.length; i++) {
+      latlng = new google.maps.LatLng(item_data_list[i].x, item_data_list[i].y);
+      marker = new google.maps.Marker({
+        position: latlng,
+        icon: iconBase + "icon29.png",
+        map: map,
+        title: "Item " + (i+1) + " (" + item_data_list[i].x + ", " + item_data_list[i].y + ")"
+      });
+
+      item_markers.push(marker);
     }
   }
 

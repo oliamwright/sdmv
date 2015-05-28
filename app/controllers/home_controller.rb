@@ -6,5 +6,8 @@ class HomeController < ApplicationController
 
     @person_value = PersonValue.new
     @person_values = PersonValue.all
+
+    @item = Item.new
+    @items = Item.all
   end
 end

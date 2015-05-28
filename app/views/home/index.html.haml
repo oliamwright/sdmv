@@ -2,7 +2,7 @@
   .grid_12
     %h1 SDMV
     %hr
-  .grid_6
+  .grid_2
     INT LVL needs to be greater than:
     %br
     %input#possibly_attending_base{:value => ".1"} 
@@ -11,7 +11,7 @@
     %hr
     INT LVL needs to be greater than:
     %br
-    %input#probably_attending_base{:value => ".49"} 
+    %input#probably_attending_base{:value => ".5"} 
     %br
     to = Probably Attending
     %hr
@@ -21,7 +21,7 @@
     %br
     Then Push = 
     %b TRUE
-    %hr
+    %br
     If Push = TRUE, then display
     %br
     .btn#push_notice{:style => "display: none;"} Push Notice
@@ -43,10 +43,9 @@
       .joined.inline
         %b joined:
         %span#joined_count 0
-  .grid_6
-
+  .grid_4
     #container{:style => "height: 320px; margin: 0 auto;"}
-  .grid_12.map_canvas#map
+  .grid_6.map_canvas#map
   .grid_12
     .note Take Top Keyword 1 + Top Keyword 2 from News & Social, and find the average value between Availability, and choose Venue with highest weight, and show average of influence and interest levels.
     %hr
@@ -56,7 +55,7 @@
       %h3 News Source #1
       %textarea#news.news{} Nepal earthquake Death toll passes 4,800 as rescuers in nepal face challenges. More than 4,800 people dead. More than 9,200 injured. Eight million affected across Nepal. One million children urgently in need of help. Those are the startling numbers that indicate the scale of the devastation from the huge earthquake that struck the Himalayan nation on Saturday.
       %h3 Exclusions
-      %textarea#exclusion.social{}the,and,those,are,that,of,more,than,.,in,more,are,on,a,to,as,1,2,3,4,5,6,7,8,9,0
+      %textarea#exclusion.social{}the,and,those,are,that,of,more,than,.,in,more,are,on,a,to,as,1,2,3,4,5,6,7,8,9,0,this,is,it,you,be,if,I,with,was,will,for,its,it's,it’s,one,going,big,he,from,not,have,his,me,my,but,does,they,
       %h4 Top 5 Keywords by Density
       %ul#news_result
         / %li Nepal (6)
@@ -65,7 +64,6 @@
         / %li Dead (2)
         / %li Affected (2)
       .note Calculate the top 5 keywords from the textarea above, excluding the exclusion list.
-  .grid_3
     %h2 Social
     .box
       %h3 Social Source - TimeStamp #1
@@ -181,14 +179,31 @@
 
     .box
       %h3 New Venue
+<<<<<<< HEAD
       %h4 Location (Address)
+=======
+      %h4 Location (X,Y)
+>>>>>>> master
       = form_for @venue, remote: true do |f|
         = f.text_field :address, :class => "requirement"
         = f.submit 'Add', :id => "add_venue"
         = f.hidden_field "x"
         = f.hidden_field "y"
 
+  .grid_3
+    %h2 Item
+    = render :partial => 'items/list', locals: { items: @items }
+
+    .box
+      %h3 New Item
+      = form_for @item, remote: true do |f|
+        %h4 Location (X,Y)
+        = f.text_field :x, class: "loc numeric"
+        = f.text_field :y, class: "loc numeric"
+        %h4 Keywords
+        = f.text_field :keywords, class: "requirement"
+        = f.submit 'Add'
+
   .grid_12
     = render :partial => 'shared/tasks'
 = render :partial => 'shared/mob'
-

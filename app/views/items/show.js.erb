@@ -1,0 +1,3 @@
+$('#item_section').html("<%= escape_javascript(render partial: 'list', locals: { items: @items }) %>");
+
+update_item_markers('<%= raw @items.to_json %>');

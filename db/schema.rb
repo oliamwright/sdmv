@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150526214105) do
+=======
+ActiveRecord::Schema.define(version: 20150527192323) do
+
+  create_table "items", force: true do |t|
+    t.float    "x",          limit: 24
+    t.float    "y",          limit: 24
+    t.string   "keywords"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+>>>>>>> master
 
   create_table "person_values", force: true do |t|
     t.float    "x",                 limit: 24
