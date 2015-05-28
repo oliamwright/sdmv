@@ -3,4 +3,8 @@ class Venue < ActiveRecord::Base
   validates :y, presence: true
 
   has_many :venue_person_values, dependent: :destroy
+
+  def self.by_val
+  	Venue.order(sum_value: :desc).includes(:venue_person_values)
+  end
 end

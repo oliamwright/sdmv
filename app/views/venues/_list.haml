@@ -1,9 +1,9 @@
 #venue_section
   - @venues.each_with_index do |venue, index|
     .box
-      %h3= "Venue #" + index.to_s
-      = form_for venue, method: :patch, :html => {:id => "venue_#{index}"}, remote: true do |f|
-        %h4 Location (Address)
+      %h3= "Location #" + (index+1).to_s
+      = form_for venue, method: :patch, :html => {:id => "venue_#{index+1}"}, remote: true do |f|
+        %h4 Address
         = f.text_field :address, :value => venue.address, :class => "requirement"
         %h4 Catogory
         = f.text_field :category, :value => venue.category, :class => "requirement"
@@ -17,10 +17,11 @@
         = f.text_field :contact, :value => venue.contact, :class => "requirement"
         %h4 Is Booked?
         = f.check_box :booked, :value => venue.booked
-        = f.submit 'Update', :onclick => "update_latlong(#{index});"
+        = f.submit 'Update', :onclick => "update_latlong(#{index+1});"
         = f.hidden_field "x", :value => venue.x
         = f.hidden_field "y", :value => venue.y
       = button_to 'Delete', venue, method: :delete, remote: true, data: { confirm: 'Are you sure?' }
+      %br
       %table.full.list
         %tr
           %th Person
@@ -30,7 +31,7 @@
           %th VAL
         - venue.venue_person_values.each_with_index do |vpv, idx|
           %tr
-            %td= "Person #" + idx.to_s
+            %td= "Person #" + (idx+1).to_s
             %td= vpv.dist
             %td= vpv.person_value.int_lvl
             %td= vpv.person_value.influence
@@ -40,4 +41,6 @@
           %td= venue.sum_dist
           %td 
           %td 
-          %td= venue.sum_value
+          %td{:id => "venue_val_#{index+1}"}= venue.sum_value
+
+  = hidden_field_tag "venue_count", @venues.length, { :id => "venue_count" }

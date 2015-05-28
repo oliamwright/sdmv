@@ -111,7 +111,7 @@
     .box
       %h3 New Person
       = form_for @person_value, remote: true, format: :js, html: { id: "new_person_form"} do |f|
-        %h4 Location (X,Y)
+        %h4 Location (Long, Lat)
         = f.text_field :x, class: "loc numeric"
         = f.text_field :y, class: "loc numeric"
         %h4 Influence (higher is better)
@@ -123,7 +123,7 @@
         = f.text_field :keywords, class: "requirement"
         = f.submit 'Add'
   .grid_3
-    %h2 Venue
+    %h2 Location
     / .box
     /   %h3 Venue #1
     /   %h4 Location (X,Y)
@@ -178,9 +178,9 @@
     = render :partial => 'venues/list', locals: { venues: @venues }
 
     .box
-      %h3 New Venue
+      %h3 New Location
       = form_for @venue, remote: true do |f|
-        %h4 Location (Address)
+        %h4 Address
         = f.text_field :address, :class => "requirement"
         %h4 Catogory
         = f.text_field :category, :class => "requirement"
@@ -206,7 +206,7 @@
     .box
       %h3 New Item
       = form_for @item, remote: true do |f|
-        %h4 Location (X,Y)
+        %h4 Location (Long, Lat)
         = f.text_field :x, class: "loc numeric"
         = f.text_field :y, class: "loc numeric"
         %h4 Keywords

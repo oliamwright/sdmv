@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 
   def index
     @venue = Venue.new
-    @venues = Venue.all
+    @venues = Venue.by_val
 
     @person_value = PersonValue.new
     @person_values = PersonValue.all

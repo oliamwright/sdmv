@@ -249,7 +249,7 @@ $(document).ready(function() {
     probably_attending = 0;
 
     person_count = parseFloat($('#person_count').val());
-    for (var i = 0; i < person_count; i++) {
+    for (var i = 1; i <= person_count; i++) {
       if (parseFloat($('#person_int_lvl' + i).html() / 100) >= $('#possibly_attending_base').val()) {
         possibly_attending ++;
       }
@@ -284,7 +284,7 @@ $(document).ready(function() {
 
   $('#push_notice').on('click', function() {
     person_count = parseFloat($('#person_count').val());
-    for (var i = 0; i < person_count; i++) {
+    for (var i = 1; i <= person_count; i++) {
       $('#push_notice_received' + i).show();
       $('#join'+i).show();
     }
@@ -303,7 +303,6 @@ $(document).ready(function() {
   // @Param: address - user-typed value
   this.convert_address = function(address) {
     geocoder.geocode({'address': address}, function(results, status) {
-      debugger;
       if (status == google.maps.GeocoderStatus.OK) {
         return results[0].geometry.location;
       } else {
@@ -313,7 +312,6 @@ $(document).ready(function() {
   }
 
   this.update_latlong = function (index) {
-    debugger;
     form_id = '#venue_' + index;
     address = $(form_id + ' ' + '#venue_address').val();      
 
@@ -332,8 +330,9 @@ $(document).ready(function() {
     });
   }
 
-  $('#add_venue').click(function() {
-    address = $('#venue_address').val();
+  // When add a new Venue, convert address into LatLong by Geocoding
+  $('#add_venue').on('click', function() {
+    address = $('#new_venue #venue_address').val();
 
     if (address == "") {
       alert('Address is mandatory field.');
@@ -349,5 +348,29 @@ $(document).ready(function() {
       }
     });
   })
+
+  $('#new_venue').on('ajax:success', function(event, data, status, xhr) {
+    max_value = -99999;
+    max_index = 0;
+    venue_count = parseFloat($('#venue_count').val());
+    for (var i = 1; i <= venue_count; i++) {
+      if (parseFloat($("#venue_val_" + i).html()) > max_value) {
+        max_index = i;
+        max_value = parseFloat($("#venue_val_" + i).html());
+      }
+    }
+
+    $('#max_venue').html(max_index);
+
+    // Reset the form
+    $('#new_venue #venue_address').val('');
+    $('#new_venue #venue_category').val('');
+    $('#new_venue #venue_open_times_from').val('');
+    $('#new_venue #venue_open_times_to').val('');
+    $('#new_venue #venue_attendee_count').val('');
+    $('#new_venue #venue_contact').val('');
+    $('#new_venue #new_venue_x').val('');
+    $('#new_venue #new_venue_y').val('');
+  });
 });
 

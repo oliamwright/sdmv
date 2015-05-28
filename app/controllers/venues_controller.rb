@@ -8,7 +8,7 @@ class VenuesController < ApplicationController
     update_venue_person
 
     respond_to do |format|
-      @venues = Venue.all
+      @venues = Venue.by_val
       @person_values = PersonValue.includes(:venue_person_values).all
       format.js { render action: "show"}
     end
@@ -21,7 +21,7 @@ class VenuesController < ApplicationController
     update_venue_person
 
     respond_to do |format|  
-      @venues = Venue.all
+      @venues = Venue.by_val
       @person_values = PersonValue.includes(:venue_person_values).all
       format.js { render action: "show"}
     end
@@ -33,7 +33,7 @@ class VenuesController < ApplicationController
     update_venue_person
 
     respond_to do |format|
-      @venues = Venue.all
+      @venues = Venue.by_val
       @person_values = PersonValue.includes(:venue_person_values).all
       format.js { render action: "show"}
     end

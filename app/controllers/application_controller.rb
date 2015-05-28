@@ -18,8 +18,7 @@ class ApplicationController < ActionController::Base
         vpv.person_value_id = pv.id
         vpv.dist = number_with_precision(
           calculate_distance(venue.x, venue.y, pv.x, pv.y), :precision => 1)
-        vpv.value = number_with_precision(
-          (vpv.dist == 0 ? 0 : pv.int_lvl.to_f * pv.influence / vpv.dist), :precision => 1)
+        vpv.value = vpv.dist == 0 ? 0 : pv.int_lvl.to_f * pv.influence / vpv.dist
 
         if vpv.save
           sum_dist += vpv.dist

@@ -24,12 +24,12 @@ $(function () {
 
     venue_data_list = JSON.parse(venue_data);
     for (var i = 0; i < venue_data_list.length; i++) {
-      latlng = new google.maps.LatLng(venue_data_list[i].x, venue_data_list[i].y);
+      latlng = new google.maps.LatLng(venue_data_list[i].y, venue_data_list[i].x);
       marker = new google.maps.Marker({
         position: latlng,
         icon: iconBase + "icon63.png",
         map: map,
-        title: "Venue " + (i+1) + " (" + venue_data_list[i].x + ", " + venue_data_list[i].y + ")"
+        title: "Location " + (i+1) + " (" + venue_data_list[i].x + ", " + venue_data_list[i].y + ")"
       });
 
       venue_markers.push(marker);
