@@ -2,11 +2,24 @@
   - @venues.each_with_index do |venue, index|
     .box
       %h3= "Venue #" + index.to_s
-      %h4 Location (X,Y)
-      = form_for venue, method: :patch, remote: true do |f|
-        = f.text_field :x, :value => venue.x, class: "loc numeric"
-        = f.text_field :y, :value => venue.y, class: "loc numeric"
-        = f.submit 'Update'
+      = form_for venue, method: :patch, :html => {:id => "venue_#{index}"}, remote: true do |f|
+        %h4 Location (Address)
+        = f.text_field :address, :value => venue.address, :class => "requirement"
+        %h4 Catogory
+        = f.text_field :category, :value => venue.category, :class => "requirement"
+        %h4 Open Time From
+        = f.text_field :open_times_from, :value => venue.open_times_from.nil? ? "" : venue.open_times_from.strftime("%H:%M"), :class => "time"
+        %h4 Open Time To
+        = f.text_field :open_times_to, :value => venue.open_times_to.nil? ? "" : venue.open_times_to.strftime("%H:%M"), :class => "time"
+        %h4 Attendee Count
+        = f.number_field :attendee_count, :value => venue.attendee_count, :class => "loc numeric"
+        %h4 Contact Point
+        = f.text_field :contact, :value => venue.contact, :class => "requirement"
+        %h4 Is Booked?
+        = f.check_box :booked, :value => venue.booked
+        = f.submit 'Update', :onclick => "update_latlong(#{index});"
+        = f.hidden_field "x", :value => venue.x
+        = f.hidden_field "y", :value => venue.y
       = button_to 'Delete', venue, method: :delete, remote: true, data: { confirm: 'Are you sure?' }
       %table.full.list
         %tr

@@ -301,13 +301,33 @@ $(document).ready(function() {
 
   // Convert address into latitude-longitude
   // @Param: address - user-typed value
-  window.convert_address = function(address) {
+  this.convert_address = function(address) {
     geocoder.geocode({'address': address}, function(results, status) {
       debugger;
       if (status == google.maps.GeocoderStatus.OK) {
         return results[0].geometry.location;
       } else {
         return null;
+      }
+    });
+  }
+
+  this.update_latlong = function (index) {
+    debugger;
+    form_id = '#venue_' + index;
+    address = $(form_id + ' ' + '#venue_address').val();      
+
+    if (address == '') {
+      alert('Address is mandatory field.');
+      return;
+    }
+
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        latlong = results[0].geometry.location;
+        $(form_id + ' ' + '#venue_x').val(latlong.F);
+        $(form_id + ' ' + '#venue_y').val(latlong.A);
+        $(form_id).submit();
       }
     });
   }
@@ -321,12 +341,10 @@ $(document).ready(function() {
     }
 
     geocoder.geocode({'address': address}, function(results, status) {
-      debugger;
       if (status == google.maps.GeocoderStatus.OK) {
         latlong = results[0].geometry.location;
-        $('#x').val(latlong.F);
-        $('#y').val(latlong.A);
-        debugger;
+        $('#new_venue_x').val(latlong.F);
+        $('#new_venue_y').val(latlong.A);
         $('#new_venue').submit();
       }
     });

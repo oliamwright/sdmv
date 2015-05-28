@@ -1,14 +1,9 @@
 $(function () {
   iconBase = "https://maps.google.com/mapfiles/kml/pal4/";
 
-<<<<<<< HEAD
   venue_markers = [];   // Venue Marker Objects
   person_markers = [];  // Person Marker Objects
-=======
-  venue_markers = [];
-  person_markers = [];
   item_markers = [];
->>>>>>> master
 
   mapCanvas = $('#map')[0];
   mapOptions = {
