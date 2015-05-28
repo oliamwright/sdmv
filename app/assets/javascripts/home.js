@@ -249,7 +249,7 @@ $(document).ready(function() {
     probably_attending = 0;
 
     person_count = parseFloat($('#person_count').val());
-    for (var i = 0; i < person_count; i++) {
+    for (var i = 1; i <= person_count; i++) {
       if (parseFloat($('#person_int_lvl' + i).html() / 100) >= $('#possibly_attending_base').val()) {
         possibly_attending ++;
       }
@@ -284,46 +284,93 @@ $(document).ready(function() {
 
   $('#push_notice').on('click', function() {
     person_count = parseFloat($('#person_count').val());
-    for (var i = 0; i < person_count; i++) {
+    for (var i = 1; i <= person_count; i++) {
       $('#push_notice_received' + i).show();
       $('#join'+i).show();
     }
   })
 
-  // Update Highchart series data for Venue objects
-  // This is called as Ajax callback
-  window.update_venue_data = function(venue_data) {
-    chart = $('#container').highcharts();
-
-    venue_series_data = [];
-    venue_data_list = JSON.parse(venue_data);
-    for (var i = 0; i < venue_data_list.length; i++) {
-      venue_series_data.push([venue_data_list[i].x, venue_data_list[i].y]);
+  var join_notification = function(obj) {
+    joined_id = $(obj).attr('data-id');
+    if (joined_person_list.indexOf(joined_id) < 0) {
+      joined_person_list.push(joined_id);
     }
 
-    chart.series[1].setData(venue_series_data);
+    $('#joined_count').html(joined_person_list.length);
+  };
+
+  // Convert address into latitude-longitude
+  // @Param: address - user-typed value
+  this.convert_address = function(address) {
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        return results[0].geometry.location;
+      } else {
+        return null;
+      }
+    });
   }
 
-  // Update Highchart series data for Person objects
-  // This is called as Ajax callback
-  window.update_person_data = function(person_data) {
-    chart = $('#container').highcharts();
+  this.update_latlong = function (index) {
+    form_id = '#venue_' + index;
+    address = $(form_id + ' ' + '#venue_address').val();      
 
-    person_series_data = [];
-    person_data_list = JSON.parse(person_data);
-    for (var i = 0; i < person_data_list.length; i++) {
-      person_series_data.push([person_data_list[i].x, person_data_list[i].y]);
+    if (address == '') {
+      alert('Address is mandatory field.');
+      return;
     }
 
-    chart.series[0].setData(person_series_data);
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        latlong = results[0].geometry.location;
+        $(form_id + ' ' + '#venue_x').val(latlong.F);
+        $(form_id + ' ' + '#venue_y').val(latlong.A);
+        $(form_id).submit();
+      }
+    });
   }
+
+  // When add a new Venue, convert address into LatLong by Geocoding
+  $('#add_venue').on('click', function() {
+    address = $('#new_venue #venue_address').val();
+
+    if (address == "") {
+      alert('Address is mandatory field.');
+      return;
+    }
+
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        latlong = results[0].geometry.location;
+        $('#new_venue_x').val(latlong.F);
+        $('#new_venue_y').val(latlong.A);
+        $('#new_venue').submit();
+      }
+    });
+  })
+
+  $('#new_venue').on('ajax:success', function(event, data, status, xhr) {
+    max_value = -99999;
+    max_index = 0;
+    venue_count = parseFloat($('#venue_count').val());
+    for (var i = 1; i <= venue_count; i++) {
+      if (parseFloat($("#venue_val_" + i).html()) > max_value) {
+        max_index = i;
+        max_value = parseFloat($("#venue_val_" + i).html());
+      }
+    }
+
+    $('#max_venue').html(max_index);
+
+    // Reset the form
+    $('#new_venue #venue_address').val('');
+    $('#new_venue #venue_category').val('');
+    $('#new_venue #venue_open_times_from').val('');
+    $('#new_venue #venue_open_times_to').val('');
+    $('#new_venue #venue_attendee_count').val('');
+    $('#new_venue #venue_contact').val('');
+    $('#new_venue #new_venue_x').val('');
+    $('#new_venue #new_venue_y').val('');
+  });
 });
 
-var join_notification = function(obj) {
-  joined_id = $(obj).attr('data-id');
-  if (joined_person_list.indexOf(joined_id) < 0) {
-    joined_person_list.push(joined_id);
-  }
-
-  $('#joined_count').html(joined_person_list.length);
-};

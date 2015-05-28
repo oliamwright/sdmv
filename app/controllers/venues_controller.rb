@@ -3,15 +3,12 @@ class VenuesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    @venue = Venue.new
-    @venue.x = params["venue"]["x"]
-    @venue.y = params["venue"]["y"]
-    @venue.save
+    Venue.create permit_param
 
     update_venue_person
 
     respond_to do |format|
-      @venues = Venue.all
+      @venues = Venue.by_val
       @person_values = PersonValue.includes(:venue_person_values).all
       format.js { render action: "show"}
     end
@@ -19,12 +16,12 @@ class VenuesController < ApplicationController
 
   def update
     venue = Venue.find(params["id"])
-    venue.update_attributes(:x => params["venue"]["x"], :y => params["venue"]["y"])
+    venue.update_attributes permit_param
 
     update_venue_person
 
     respond_to do |format|  
-      @venues = Venue.all
+      @venues = Venue.by_val
       @person_values = PersonValue.includes(:venue_person_values).all
       format.js { render action: "show"}
     end
@@ -36,12 +33,17 @@ class VenuesController < ApplicationController
     update_venue_person
 
     respond_to do |format|
-      @venues = Venue.all
+      @venues = Venue.by_val
       @person_values = PersonValue.includes(:venue_person_values).all
       format.js { render action: "show"}
     end
   end
 
   private
+
+  def permit_param
+    params.require(:venue).permit :address, :x, :y, :category, :open_times_from, :open_times_to,
+                                  :attendee_count, :contact, :booked
+  end
  
 end

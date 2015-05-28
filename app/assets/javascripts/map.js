@@ -1,8 +1,8 @@
 $(function () {
   iconBase = "https://maps.google.com/mapfiles/kml/pal4/";
 
-  venue_markers = [];
-  person_markers = [];
+  venue_markers = [];   // Venue Marker Objects
+  person_markers = [];  // Person Marker Objects
   item_markers = [];
 
   mapCanvas = $('#map')[0];
@@ -11,6 +11,7 @@ $(function () {
     zoom: 14,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
+
   map = new google.maps.Map(mapCanvas, mapOptions);
 
   // Update Google Map Makers for Venue objects
@@ -23,12 +24,12 @@ $(function () {
 
     venue_data_list = JSON.parse(venue_data);
     for (var i = 0; i < venue_data_list.length; i++) {
-      latlng = new google.maps.LatLng(venue_data_list[i].x, venue_data_list[i].y);
+      latlng = new google.maps.LatLng(venue_data_list[i].y, venue_data_list[i].x);
       marker = new google.maps.Marker({
         position: latlng,
         icon: iconBase + "icon63.png",
         map: map,
-        title: "Venue " + (i+1) + " (" + venue_data_list[i].x + ", " + venue_data_list[i].y + ")"
+        title: "Location " + (i+1) + " (" + venue_data_list[i].x + ", " + venue_data_list[i].y + ")"
       });
 
       venue_markers.push(marker);
