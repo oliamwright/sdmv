@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150527192323) do
+ActiveRecord::Schema.define(version: 20150530071709) do
 
   create_table "items", force: true do |t|
     t.float    "x",          limit: 24
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20150527192323) do
     t.float    "int_lvl",           limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "from"
+    t.datetime "to"
   end
 
   create_table "venue_person_values", force: true do |t|
@@ -41,12 +43,15 @@ ActiveRecord::Schema.define(version: 20150527192323) do
   end
 
   create_table "venues", force: true do |t|
-    t.float    "x",          limit: 24
-    t.float    "y",          limit: 24
+    t.float    "x",            limit: 24
+    t.float    "y",            limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "sum_dist",   limit: 24
-    t.float    "sum_value",  limit: 24
+    t.float    "sum_dist",     limit: 24
+    t.float    "sum_value",    limit: 24
+    t.datetime "from"
+    t.datetime "to"
+    t.integer  "minimum_time",            null: false
   end
 
 end
