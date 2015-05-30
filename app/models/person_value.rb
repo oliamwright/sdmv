@@ -2,7 +2,6 @@ require 'time_range'
 
 class PersonValue < ActiveRecord::Base
   VELOCITY = 50.0 / 1.hour # 50 kilometers per hour
-  MINIMUM_TIME_AT_VENUE = 30.minutes
 
   validates :x, presence: true
   validates :y, presence: true
@@ -25,7 +24,7 @@ class PersonValue < ActiveRecord::Base
   end
 
   def available_for_venue?(venue)
-    MINIMUM_TIME_AT_VENUE <=
+    venue.minimum_time <=
       time_range_at_venue(venue).intersection(venue.time_range).seconds
   end
 end
