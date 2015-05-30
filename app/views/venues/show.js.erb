@@ -1,0 +1,3 @@
+$('#venue_section').html("<%= escape_javascript(render partial: 'list', locals: { venues: @venues }) %>");
+update_venue_data('<%= raw @venues.to_json %>');
+update_venue_markers('<%= raw @venues.to_json %>');
