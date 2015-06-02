@@ -1,0 +1,125 @@
+.container_12
+	.grid_12
+		.submenu
+			.nav-section
+				.nav
+					.logo SURGE
+				.nav SIGNALS
+				.nav SITUATIONS
+				.nav PEOPLE
+				.nav ITEMS
+				.nav VENUES
+	.grid_12
+		.body
+			.title
+				The
+				.key.key1#title_keyword1.inline 
+				.key.key2#title_keyword2.inline
+				Group
+	.grid_12
+		%hr
+		%b KEYWORD EXCLUSIONS
+		%textarea#exclusion.textarea{}the,and,those,are,that,of,more,than,.,in,more,are,on,a,to,as,1,2,3,4,5,6,7,8,9,0
+		%hr
+		%table.full.list
+			%tr
+				%th NEWS
+				%th Headline
+				%th Body
+				%th Top Keywords
+				%th
+			%tr
+				%td 
+					1
+				%td
+					%input.input
+				%td
+					%textarea#news.textarea{} Nepal earthquake Death toll passes 4,800 as rescuers in nepal face challenges. More than 4,800 people dead. More than 9,200 injured. Eight million affected across Nepal. One million children urgently in need of help. Those are the startling numbers that indicate the scale of the devastation from the huge earthquake that struck the Himalayan nation on Saturday.
+				%td
+					%ul#news_result
+				%td
+	.grid_12
+		%hr
+		%table.full.list
+			%tr
+				%th SOCIAL
+				%th Source
+				%th Keywords
+				%th Top Keywords
+				%th Match
+			%tr
+				%td 
+					1
+				%td 
+					%input.input
+				%td 
+					%textarea#social.input{} nepal,nepal,nepal,earthquake,earthquake
+				%td 
+					%ul#social_result
+				%td
+					%p.sum
+						%span#social_news_comp Social / News Keyword Comp = 0%
+	.grid_12
+		%hr
+		%table.full.list
+			%tr
+				%th PERSON
+				%th x
+				%th y
+				%th INF LVL
+				%th start
+				%th stop
+				%th keywords
+				%th INT LVL
+			- @person_values.each_with_index do |person, index|
+				%tr
+					= form_for person, method: :patch, remote: true do |f|
+						%td
+							= index.to_s
+						%td 
+							= f.text_field :x, :value => person.x, class: "input"
+						%td
+							= f.text_field :y, :value => person.y, class: "input"
+						%td
+							= f.text_field :influence, :value => person.influence, class: "input"
+						%td
+							= f.text_field :availability_from, :value => person.availability_from.nil? ? "" : person.availability_from.strftime("%H:%M"), class: "input"
+						%td
+							= f.text_field :availability_to, :value => person.availability_to.nil? ? "" : person.availability_to.strftime("%H:%M"), class: "input"
+						%td
+							= f.text_field :keywords, :value => person.keywords, class: "input"
+						%td
+							%span{:id => "person_int_lvl#{index}"}= (person.int_lvl.to_f * 100)
+						%td
+							= f.submit 'Update'
+					%td
+						= button_to 'Delete', person, method: :delete, remote: true, data: { confirm: 'Are you sure?' }
+					%td
+						.notice{:id => "push_notice_received#{index}", style: "display:none;"} Join?
+					%td
+						.add{:id => "join#{index}", :style => "display:none;", :onclick => "join_notification(this);", :data => {:id => person.id}} + Join
+	.grid_12
+		%hr
+		%table.full.list
+			%tr
+				%th ITEM
+				%th x
+				%th y
+				%th keywords
+				%th 
+				%th
+			- @items.each_with_index do |item, index|
+				%tr
+					= form_for item, method: :patch, remote: true do |f|
+						%td 
+							= index.to_s
+						%td
+							= f.text_field :x, :value => item.x, class: "input"
+						%td
+							= f.text_field :y, :value => item.y, class: "input"
+						%td
+							= f.text_field :keywords, :value => item.keywords, class: "input"
+						%td
+							= f.submit 'Update'
+					%td
+						= button_to 'Delete', item, method: :delete, remote: true, data: { confirm: 'Are you sure?' }

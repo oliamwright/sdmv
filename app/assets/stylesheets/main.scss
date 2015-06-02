@@ -1,3 +1,14 @@
+.list tr:hover {
+	background: #ffc;
+}
+.list {
+	.short {
+		width: 50px;
+	}
+	.long {
+		width: 150px;
+	}
+}
 //--FONTS--//
 body {
   font-weight: lighter;
@@ -491,22 +502,21 @@ textarea.message, textarea.goal {
 .add {
   font-family: 'Roboto Slab', serif;
   background: #5CACC4;
-  padding: 10px 10px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
   color: #fff;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 12px;
   text-align: center;
   display: block;
   border: none;
-  border-bottom: 4px solid #0076CC;
+  border-bottom: 2px solid #0076CC;
 }
 .add:hover {
   background: #0096CC;
   border-bottom: 1px solid #0076CC;
-  border-top: 3px solid #fff;
+  border-top: 1px solid #fff;
 }
 .btn {
   font-family: 'Roboto Slab', serif;
