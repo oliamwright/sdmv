@@ -12,22 +12,26 @@ $(document).ready(function() {
   // Keeps joined person Id list
   joined_person_list = [];
 
-  function update_news() {
+  // when lost focus on news area
+  $('#news, #exclusion').on('blur', function() {
     $.ajax({
       url: '/news',
       type: 'POST',
       data: { 
         news:       $('#news').val(),
-        exclusion:  $('#exclusion').val()
+        news_location: [$('#news_location_long').val(), $('#news_location_lat').val()],
+        exclusion:  $('#exclusion').val(),
       },
       success: function(e) {
         news_keywords = JSON.parse(e.news_keywords);
         append_news_result(e);
+
+        update_news_markers();
       },
       error: function(e) {
       }
     });
-  }
+  });
 
   function append_news_result(resp) {
     json_obj = JSON.parse(resp.result);
@@ -50,7 +54,10 @@ $(document).ready(function() {
     $.ajax({
       url: '/social',
       type: 'POST',
-      data: { social: $('#social').val() },
+      data: { 
+        social: $('#social').val(),
+        news_location: [$('#social_location_long').val(), $('#social_location_lat').val()]
+      },
       success: function(e) {
         result_obj = JSON.parse(e.result);
         social_keywords = JSON.parse(e.social_keywords);
@@ -65,14 +72,12 @@ $(document).ready(function() {
         $('#social_news_comp').text('Social / News Keyword Comp = ' + e.similarity + '%');
 
         // calculate_social_person();
+        update_social_markers();
       },
       error: function(e) {
       }
     });
   });
-
-  // when lost focus on news area
-  $('#news, #exclusion').on('blur', update_news);
 
   // If numeric field value is not invalid, give focus on that
   $('.numeric').on('blur', function() {
