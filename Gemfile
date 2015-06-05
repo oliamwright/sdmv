@@ -47,3 +47,4 @@ gem 'rspec-rails', group: [:development, :test]
 gem 'simplecov', group: [:test], require: false
 
 gem 'rubocop', group: :development, require: false
+gem 'feedjira'
