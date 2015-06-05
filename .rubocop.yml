@@ -1,6 +1,18 @@
 AllCops:
   RunRailsCops: true
 
+  Exclude:
+    - db/schema.rb
+
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
 Metrics/AbcSize:
   Enabled: false
 
@@ -14,4 +26,7 @@ Style/Documentation:
   Enabled: false
 
 Style/FormatString:
+  Enabled: false
+
+Style/AndOr:
   Enabled: false
