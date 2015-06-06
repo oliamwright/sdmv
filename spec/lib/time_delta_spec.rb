@@ -25,20 +25,20 @@ end
 describe TimeDelta do
   subject { TimeDelta.new(0) }
 
-  it { respond_to :initialize_with_seconds }
-  it { respond_to :initialize_with_times }
+  it { should respond_to :initialize_with_seconds }
+  it { should respond_to :initialize_with_times }
 
-  it { respond_to :seconds }
-  it { respond_to :minutes }
-  it { respond_to :hours }
-  it { respond_to :days }
+  it { should respond_to :seconds }
+  it { should respond_to :minutes }
+  it { should respond_to :hours }
+  it { should respond_to :days }
 
-  it { respond_to :sec }
-  it { respond_to :min }
-  it { respond_to :hour }
+  it { should respond_to :sec }
+  it { should respond_to :min }
+  it { should respond_to :hour }
 
-  it { respond_to :humanize }
-  it { respond_to :to_s }
+  it { should respond_to :humanize }
+  it { should respond_to :to_s }
 
   describe '#initialize' do
     it 'takes number of seconds' do

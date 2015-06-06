@@ -9,15 +9,15 @@ TIME = Time.now
 describe TimeRange do # << TimeDelta
   subject { TimeRange.new(Time.now, Time.now) }
 
-  it { respond_to :empty? }
+  it { should respond_to :empty? }
 
-  it { respond_to :== }
-  it { respond_to :eql? }
+  it { should respond_to :== }
+  it { should respond_to :eql? }
 
-  it { respond_to :& }
-  it { respond_to :intersection }
+  it { should respond_to :& }
+  it { should respond_to :intersection }
 
-  it { respond_to :include? }
+  it { should respond_to :include? }
 
   describe '#initialize' do
     it 'takes two time values' do
