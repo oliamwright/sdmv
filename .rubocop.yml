@@ -30,3 +30,6 @@ Style/FormatString:
 
 Style/AndOr:
   Enabled: false
+
+Style/TrailingComma:
+  Enabled: false
