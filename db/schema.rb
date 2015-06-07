@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150605161057) do
+ActiveRecord::Schema.define(version: 20150607072115) do
 
   create_table "items", force: true do |t|
     t.float    "x",          limit: 24
@@ -42,9 +42,18 @@ ActiveRecord::Schema.define(version: 20150605161057) do
     t.float    "int_lvl",           limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "from"
-    t.datetime "to"
   end
+
+  create_table "time_ranges", force: true do |t|
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.datetime "from",       null: false
+    t.datetime "to",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "time_ranges", ["owner_id", "owner_type"], name: "index_time_ranges_on_owner_id_and_owner_type", using: :btree
 
   create_table "venue_person_values", force: true do |t|
     t.integer "venue_id"
@@ -67,8 +76,6 @@ ActiveRecord::Schema.define(version: 20150605161057) do
     t.integer  "attendee_count"
     t.string   "contact"
     t.boolean  "booked"
-    t.datetime "from"
-    t.datetime "to"
     t.integer  "minimum_time",               null: false
   end
 

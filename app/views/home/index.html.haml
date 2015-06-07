@@ -119,17 +119,16 @@
 
     .box
       / %h3 News Source #1
-      / %h4 Location(Long, Lat)
-      / %input#news_location_long.loc.numeric
-      / %input#news_location_lat.loc.numeric
-      / %h4 RSS
-      / %input#news_rss.requirement
       / %textarea#news.news{} Nepal earthquake Death toll passes 4,800 as rescuers in nepal face challenges. More than 4,800 people dead. More than 9,200 injured. Eight million affected across Nepal. One million children urgently in need of help. Those are the startling numbers that indicate the scale of the devastation from the huge earthquake that struck the Himalayan nation on Saturday.
       / %h3 Exclusions
       / %textarea#exclusion.social{}the,and,those,are,that,of,more,than,.,in,more,are,on,a,to,as,1,2,3,4,5,6,7,8,9,0
-      / %button#news_update Update
       / %h4 Top 5 Keywords by Density
       / %ul#news_result
+      /   / %li Nepal (6)
+      /   / %li Earthquake (4)
+      /   / %li Help (3)
+      /   / %li Dead (2)
+      /   / %li Affected (2)
       / .note Calculate the top 5 keywords from the textarea above, excluding the exclusion list.
       %h3 New News Object
       = form_for @news, remote: :true, html: { id: "news_form"} do |f|
@@ -158,6 +157,31 @@
       .note Calculate the top 5 keywords from the textarea above, and compare the similarity between News Keywords and Social Keywords
   .grid_3
     %h2 Person
+    / .box
+    /  %h3 Person #1
+    /  %h4 Location (X,Y)
+    /  %input#person_location_x1.loc.numeric{:value => "1"}
+    /  %input#person_location_y1.loc.numeric{:value => "1"}
+    /  %br
+    /  .note Allow for any number: for example 100.5 or -100.5 to be entered into the X,Y Location Fields
+    /  %h4 Influence (higher is better)
+    /  %input#influence1.requirement.numeric{:value => "500"}
+    /  .note Allow for any number: for example 100.5 or -100.5 to be entered into the Influence Field
+    /  %h4 Availability Range
+    /  %input#person1_availability_min.time{:value => "4:00"}
+    /  %input#person1_availability_max.time{:value => "6:00"}
+    /  %br
+    /  .note Allow for any number: for example 100.5 or -100.5 to be entered into the Availability Field
+    /  %hr
+    /  %h4 Keywords
+    /  %input#person_keywords1.requirement{:value => "nepal, earthquake"}
+    /  %p.sum
+    /    INT LVL = 
+    /    %span#person_int_lvl1 0
+    /    %span %
+    /  .note Compare the similarity between Social and Person Keywords
+    /  .notice Push Notification Received
+    /  .add + Join
 
     = render :partial => 'person_values/list', locals: { person: @peoples }
 

@@ -13,6 +13,6 @@
         %h4 Exclusion
         = f.text_area :exclusion, :value => news.exclusion, class: "social"
         %h4 Keywords
-        %span= news.keywords
+        %span= keywords_to_show (news.keywords)
         = f.submit 'Update'
       = button_to 'Delete', news, method: :delete, remote: true, data: { confirm: 'Are you sure?' }

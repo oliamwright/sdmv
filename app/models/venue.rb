@@ -5,12 +5,10 @@ class Venue < ActiveRecord::Base
   validates :y, presence: true
 
   has_many :venue_person_values, dependent: :destroy
+  has_many :time_ranges, as: :owner
 
   def self.by_val
   	Venue.order(sum_value: :desc).includes(:venue_person_values)
   end
-
-  def time_range
-    TimeRange.new(from, to)
-  end
+  
 end

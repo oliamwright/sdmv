@@ -33,26 +33,26 @@ $(document).ready(function() {
   //   });
   // });
 
-  $('#news_update').click(function() {
-    $.ajax({
-      url: '/news',
-      type: 'POST',
-      data: { 
-        news:           $('#news').val(),
-        news_location:  [$('#news_location_long').val(), $('#news_location_lat').val()],
-        rss:            $('#news_rss').val(),
-        exclusion:      $('#exclusion').val(),
-      },
-      success: function(e) {
-        news_keywords = JSON.parse(e.news_keywords);
-        append_news_result(e);
+  // $('#news_update').click(function() {
+  //   $.ajax({
+  //     url: '/news',
+  //     type: 'POST',
+  //     data: { 
+  //       news:           $('#news').val(),
+  //       news_location:  [$('#news_location_long').val(), $('#news_location_lat').val()],
+  //       rss:            $('#news_rss').val(),
+  //       exclusion:      $('#exclusion').val(),
+  //     },
+  //     success: function(e) {
+  //       news_keywords = JSON.parse(e.news_keywords);
+  //       append_news_result(e);
 
-        update_news_markers();
-      },
-      error: function(e) {
-      }
-    });
-  });
+  //       update_news_markers();
+  //     },
+  //     error: function(e) {
+  //     }
+  //   });
+  // });
 
   function append_news_result(resp) {
     json_obj = JSON.parse(resp.result);
