@@ -80,25 +80,28 @@ $(function () {
     }
   }
 
-  window.update_news_markers = function() {
+  window.update_news_markers = function(news_data) {
     // Update news markers
     for (var i = 0; i < news_markers.length; i++) {
       news_markers[i].setMap(null);
     }
     news_markers = [];
 
-    news_long = $('#news_location_long').val();
-    news_lat = $('#news_location_lat').val();
-    if (news_long != '' && news_lat != '') {
-      latlong = new google.maps.LatLng(parseFloat(news_lat), parseFloat(news_long));
-      marker = new google.maps.Marker({
-        position: latlong,
-        map: map,
-        icon: iconBase + "icon24.png",
-        title: "News (" + news_long + ", " + news_lat + ")"
-      });
+    news_data_list = JSON.parse(news_data);
+    for (var i = 0; i < news_data_list.length; i++) {
+      news_long = news_data_list[i].x;
+      news_lat = news_data_list[i].y;
+      if (news_long != '' && news_lat != '') {
+        latlong = new google.maps.LatLng(parseFloat(news_lat), parseFloat(news_long));
+        marker = new google.maps.Marker({
+          position: latlong,
+          map: map,
+          icon: iconBase + "icon24.png",
+          title: "News (" + news_long + ", " + news_lat + ")"
+        });
 
-      news_markers.push(marker);
+        news_markers.push(marker);
+      }  
     }
   }
 

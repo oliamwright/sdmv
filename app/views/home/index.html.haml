@@ -114,17 +114,35 @@
     %hr
   .grid_3
     %h2 News
+
+    = render :partial => 'news_objects/list', locals: { news_objects: @news_objects }
+
     .box
-      %h3 News Source #1
-      %h4 Location(Long, Lat)
-      %input#news_location_long.loc.numeric
-      %input#news_location_lat.loc.numeric
-      %textarea#news.news{} Nepal earthquake Death toll passes 4,800 as rescuers in nepal face challenges. More than 4,800 people dead. More than 9,200 injured. Eight million affected across Nepal. One million children urgently in need of help. Those are the startling numbers that indicate the scale of the devastation from the huge earthquake that struck the Himalayan nation on Saturday.
-      %h3 Exclusions
-      %textarea#exclusion.social{}the,and,those,are,that,of,more,than,.,in,more,are,on,a,to,as,1,2,3,4,5,6,7,8,9,0
-      %h4 Top 5 Keywords by Density
-      %ul#news_result
-      .note Calculate the top 5 keywords from the textarea above, excluding the exclusion list.
+      / %h3 News Source #1
+      / %h4 Location(Long, Lat)
+      / %input#news_location_long.loc.numeric
+      / %input#news_location_lat.loc.numeric
+      / %h4 RSS
+      / %input#news_rss.requirement
+      / %textarea#news.news{} Nepal earthquake Death toll passes 4,800 as rescuers in nepal face challenges. More than 4,800 people dead. More than 9,200 injured. Eight million affected across Nepal. One million children urgently in need of help. Those are the startling numbers that indicate the scale of the devastation from the huge earthquake that struck the Himalayan nation on Saturday.
+      / %h3 Exclusions
+      / %textarea#exclusion.social{}the,and,those,are,that,of,more,than,.,in,more,are,on,a,to,as,1,2,3,4,5,6,7,8,9,0
+      / %button#news_update Update
+      / %h4 Top 5 Keywords by Density
+      / %ul#news_result
+      / .note Calculate the top 5 keywords from the textarea above, excluding the exclusion list.
+      %h3 New News Object
+      = form_for @news, remote: :true, html: { id: "news_form"} do |f|
+        %h4 Location(Long, Lat)
+        = f.text_field :x, class: "loc numeric"
+        = f.text_field :y, class: "loc numeric"
+        %h4 RSS URL
+        = f.text_field :rss, class: "requirement"
+        %h4 News
+        = f.text_area :news, class: "news"
+        %h4 Exclusion
+        = f.text_area :exclusion, class: "social"
+        = f.submit 'Add'
   .grid_3
     %h2 Social
     .box

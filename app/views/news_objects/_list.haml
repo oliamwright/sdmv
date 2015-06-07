@@ -1,0 +1,18 @@
+#news_section
+  - @news_objects.each_with_index do |news, index|
+    .box
+      %h3= "News #" + (index+1).to_s
+      = form_for news, method: :patch, remote: true do |f|
+        %h4 Location (Long, Lat)
+        = f.text_field :x, :value => news.x, class: "loc numeric"
+        = f.text_field :y, :value => news.y, class: "loc numeric"
+        %h4 RSS URL
+        = f.text_field :rss, :value => news.rss, class: "requirement"
+        %h4 News
+        %div{:style => "height: 300px; overflow-y: auto; overflow-x: hidden"}= news.news
+        %h4 Exclusion
+        = f.text_area :exclusion, :value => news.exclusion, class: "social"
+        %h4 Keywords
+        %span= news.keywords
+        = f.submit 'Update'
+      = button_to 'Delete', news, method: :delete, remote: true, data: { confirm: 'Are you sure?' }

@@ -13,14 +13,35 @@ $(document).ready(function() {
   joined_person_list = [];
 
   // when lost focus on news area
-  $('#news, #exclusion').on('blur', function() {
+  // $('#news, #exclusion').on('blur', function() {
+  //   $.ajax({
+  //     url: '/news',
+  //     type: 'POST',
+  //     data: { 
+  //       news:       $('#news').val(),
+  //       news_location: [$('#news_location_long').val(), $('#news_location_lat').val()],
+  //       exclusion:  $('#exclusion').val(),
+  //     },
+  //     success: function(e) {
+  //       news_keywords = JSON.parse(e.news_keywords);
+  //       append_news_result(e);
+
+  //       update_news_markers();
+  //     },
+  //     error: function(e) {
+  //     }
+  //   });
+  // });
+
+  $('#news_update').click(function() {
     $.ajax({
       url: '/news',
       type: 'POST',
       data: { 
-        news:       $('#news').val(),
-        news_location: [$('#news_location_long').val(), $('#news_location_lat').val()],
-        exclusion:  $('#exclusion').val(),
+        news:           $('#news').val(),
+        news_location:  [$('#news_location_long').val(), $('#news_location_lat').val()],
+        rss:            $('#news_rss').val(),
+        exclusion:      $('#exclusion').val(),
       },
       success: function(e) {
         news_keywords = JSON.parse(e.news_keywords);
@@ -376,6 +397,15 @@ $(document).ready(function() {
     $('#new_venue #venue_contact').val('');
     $('#new_venue #new_venue_x').val('');
     $('#new_venue #new_venue_y').val('');
+  });
+
+  $('#news_form').on('ajax:success', function(event, data, status, xhr) {
+    // Reset the form
+    $('#news_form #news_object_x').val('');
+    $('#news_form #news_object_y').val('');
+    $('#news_form #news_object_rss').val('');
+    $('#news_form #news_object_news').val('');
+    $('#news_form #news_object_exclusion').val('');
   });
 });
 

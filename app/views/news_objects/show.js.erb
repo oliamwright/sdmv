@@ -1,0 +1,5 @@
+$('#news_section').html(
+  "<%= escape_javascript(render partial: 'list', locals: { news_objects: @news_objects }) %>"
+);
+
+update_news_markers('<%= raw @news_objects.to_json %>');

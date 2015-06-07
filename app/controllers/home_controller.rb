@@ -9,5 +9,8 @@ class HomeController < ApplicationController
 
     @item = Item.new
     @items = Item.all
+
+    @news = NewsObject.new
+    @news_objects = NewsObject.all
   end
 end
