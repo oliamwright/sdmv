@@ -6,7 +6,5 @@ class Venue < ActiveRecord::Base
 
   has_many :venue_person_values, dependent: :destroy
 
-  def time_range
-    TimeRange.new(from, to)
-  end
+  has_many :time_ranges, as: :owner
 end
