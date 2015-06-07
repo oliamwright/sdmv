@@ -8,6 +8,8 @@ class PersonValue < ActiveRecord::Base
 
   has_many :venue_person_values, dependent: :destroy
 
+  has_many :time_ranges, as: :owner
+
   def time_range
     TimeRange.new(from, to)
   end
