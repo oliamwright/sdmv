@@ -1,9 +1,11 @@
 $(function () {
   iconBase = "https://maps.google.com/mapfiles/kml/pal4/";
 
-  venue_markers = [];
-  person_markers = [];
-  item_markers = [];
+  venue_markers = [];   // Venue Marker Objects
+  person_markers = [];  // Person Marker Objects
+  item_markers = [];    // Item
+  news_markers = [];    // News
+  social_markers = [];  // Social
 
   mapCanvas = $('#map')[0];
   mapOptions = {
@@ -11,6 +13,7 @@ $(function () {
     zoom: 14,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
+
   map = new google.maps.Map(mapCanvas, mapOptions);
 
   // Update Google Map Makers for Venue objects
@@ -23,12 +26,12 @@ $(function () {
 
     venue_data_list = JSON.parse(venue_data);
     for (var i = 0; i < venue_data_list.length; i++) {
-      latlng = new google.maps.LatLng(venue_data_list[i].x, venue_data_list[i].y);
+      latlng = new google.maps.LatLng(venue_data_list[i].y, venue_data_list[i].x);
       marker = new google.maps.Marker({
         position: latlng,
         icon: iconBase + "icon63.png",
         map: map,
-        title: "Venue " + (i+1) + " (" + venue_data_list[i].x + ", " + venue_data_list[i].y + ")"
+        title: "Location " + (i+1) + " (" + venue_data_list[i].x + ", " + venue_data_list[i].y + ")"
       });
 
       venue_markers.push(marker);
@@ -45,7 +48,7 @@ $(function () {
 
     item_data_list = JSON.parse(item_data);
     for (var i = 0; i < item_data_list.length; i++) {
-      latlng = new google.maps.LatLng(item_data_list[i].x, item_data_list[i].y);
+      latlng = new google.maps.LatLng(item_data_list[i].y, item_data_list[i].x);
       marker = new google.maps.Marker({
         position: latlng,
         icon: iconBase + "icon29.png",
@@ -57,14 +60,16 @@ $(function () {
     }
   }
 
+  // Update google map markers for Person objects
   window.update_person_markers = function(person_data) {
     for (var i = 0; i < person_markers.length; i++) {
       person_markers[i].setMap(null);
     }
+    person_markers = [];
 
     person_data_list = JSON.parse(person_data);
     for (var i = 0; i < person_data_list.length; i++) {
-      latlng = new google.maps.LatLng(person_data_list[i].x, person_data_list[i].y);
+      latlng = new google.maps.LatLng(person_data_list[i].y, person_data_list[i].x);
       marker = new google.maps.Marker({
         position: latlng,
         map: map,
@@ -72,6 +77,53 @@ $(function () {
       });
 
       person_markers.push(marker);
+    }
+  }
+
+  window.update_news_markers = function(news_data) {
+    // Update news markers
+    for (var i = 0; i < news_markers.length; i++) {
+      news_markers[i].setMap(null);
+    }
+    news_markers = [];
+
+    news_data_list = JSON.parse(news_data);
+    for (var i = 0; i < news_data_list.length; i++) {
+      news_long = news_data_list[i].x;
+      news_lat = news_data_list[i].y;
+      if (news_long != '' && news_lat != '') {
+        latlong = new google.maps.LatLng(parseFloat(news_lat), parseFloat(news_long));
+        marker = new google.maps.Marker({
+          position: latlong,
+          map: map,
+          icon: iconBase + "icon24.png",
+          title: "News (" + news_long + ", " + news_lat + ")"
+        });
+
+        news_markers.push(marker);
+      }  
+    }
+  }
+
+  window.update_social_markers = function() {
+    // Update social markers
+    for (var i = 0; i < social_markers.length; i++) {
+      social_markers[i].setMap(null);
+    }
+    social_markers = [];
+
+    social_long = $('#social_location_long').val();
+    social_lat = $('#social_location_lat').val();
+    if (social_long != '' && social_lat != '') {
+      latlong = new google.maps.LatLng(parseFloat(social_lat), parseFloat(social_long));
+      marker = new google.maps.Marker({
+        position: latlong,
+        map: map,
+        icon: iconBase + "icon25.png",
+        title: "Social (" + social_long + ", " + social_lat + ")"
+      });
+
+      social_markers.push(marker);
     }
   }
 });

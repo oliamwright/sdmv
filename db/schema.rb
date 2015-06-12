@@ -21,6 +21,17 @@ ActiveRecord::Schema.define(version: 20150607072115) do
     t.datetime "updated_at"
   end
 
+  create_table "news_objects", force: true do |t|
+    t.float    "x",          limit: 24
+    t.float    "y",          limit: 24
+    t.string   "rss"
+    t.text     "news"
+    t.string   "exclusion"
+    t.string   "keywords"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "person_values", force: true do |t|
     t.float    "x",                 limit: 24
     t.float    "y",                 limit: 24
@@ -52,13 +63,20 @@ ActiveRecord::Schema.define(version: 20150607072115) do
   end
 
   create_table "venues", force: true do |t|
-    t.float    "x",            limit: 24
-    t.float    "y",            limit: 24
+    t.float    "x",               limit: 24
+    t.float    "y",               limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "sum_dist",     limit: 24
-    t.float    "sum_value",    limit: 24
-    t.integer  "minimum_time",            null: false
+    t.float    "sum_dist",        limit: 24
+    t.float    "sum_value",       limit: 24
+    t.string   "address"
+    t.string   "category"
+    t.time     "open_times_from"
+    t.time     "open_times_to"
+    t.integer  "attendee_count"
+    t.string   "contact"
+    t.boolean  "booked"
+    t.integer  "minimum_time",               null: false
   end
 
 end

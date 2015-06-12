@@ -30,6 +30,9 @@ Style/FormatString:
 
 Style/AndOr:
   Enabled: false
+<<<<<<< HEAD
+=======
 
 Style/TrailingComma:
   Enabled: false
+>>>>>>> master

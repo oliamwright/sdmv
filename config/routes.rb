@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   resources :venues, only: [:create, :update, :destroy]
   resources :person_values, only: [:create, :update, :destroy]
   resources :items, only: [:create, :update, :destroy]
+  resources :news_objects, only: [:create, :update, :destroy]
 end

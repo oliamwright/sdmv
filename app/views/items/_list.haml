@@ -1,9 +1,9 @@
 #item_section
   - @items.each_with_index do |item, index|
     .box
-      %h3= "Item #" + index.to_s
+      %h3= "Item #" + (index+1).to_s
       = form_for item, method: :patch, remote: true do |f|
-        %h4 Location (X,Y)
+        %h4 Location (Long, Lat)
         = f.text_field :x, :value => item.x, class: "loc numeric"
         = f.text_field :y, :value => item.y, class: "loc numeric"
         %h4 Keywords
