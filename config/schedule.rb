@@ -19,6 +19,9 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, :at => '8:00 am' do
-  rake "cron:rss:update_news"
+set :environment, "development"
+set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
+
+every 1.days do
+  rake "rss:update_news"
 end
